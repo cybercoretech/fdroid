@@ -1,0 +1,9 @@
+keystore.p12
+*.p12
+*.jks
+*.env
+tmp/
+build/
+.fdroid*
+unsigned/
+archive/
