@@ -1,0 +1,24 @@
+Categories:
+  - Multimedia
+  - Connectivity
+License: Apache-2.0
+AuthorName: Cybercore Tech
+AuthorEmail: dev@cybercoretech.net
+WebSite: https://github.com/cybercoretech/holodrive-android-app
+SourceCode: https://github.com/cybercoretech/holodrive-android-app
+IssueTracker: https://github.com/cybercoretech/holodrive-android-app/issues
+Changelog: https://github.com/cybercoretech/holodrive-android-app/releases
+
+Name: Holodrive Photos
+Summary: Photo gallery and uploader for your self-hosted Holodrive
+Description: |-
+  The phone companion for Holodrive, the self-hosted Cybercore web file
+  manager. Browse your photos, upload or share files into Holodrive, sync
+  folders, and create password-protected share links whose passphrases are
+  generated on the phone with Keysmith (and can be saved to CyberVault).
+
+  Requires a Holodrive server you run yourself, reached over your own network
+  or Tailscale.
+AntiFeatures:
+  NonFreeNet:
+    en-US: Needs a Holodrive server, which you host yourself.
