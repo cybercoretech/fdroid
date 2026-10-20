@@ -4,32 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Cybercore F-Droid repository</title>
-  <meta name="description" content="Add the Cybercore F-Droid repository to get CyberVault, Cybermeta and Holodrive Photos with automatic updates. Every APK is the signed GitHub release, re-verified before listing.">
+  <meta name="description" content="Add the Cybercore F-Droid repository: CyberVault, Cybermeta, Holodrive Photos, Nightwatch and SignalWarden with automatic updates. Every APK is the signed GitHub release, re-verified before listing.">
   <meta name="theme-color" content="#07070d">
   <link rel="icon" href="repo/icons/icon.png">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    :root { --a1: var(--cyan); --a2: var(--pink); --a3: var(--acid); }
-    .hero > * { min-width: 0; }
-    .add { display: grid; gap: 1.2rem; align-content: start; }
-    .qr { justify-self: center; width: min(100%, 18rem); padding: 1rem; background: #fff; border-radius: .6rem;
-      box-shadow: 0 0 0 1px var(--line), 0 0 40px color-mix(in srgb, var(--a1) 30%, transparent); }
-    .qr img { display: block; width: 100%; height: auto; }
-    .fp { font: .82rem/1.6 var(--mono); color: var(--muted); overflow-wrap: anywhere; }
-    .fp b { color: var(--a3); font-weight: 400; }
-    .apps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-    .app { display: grid; grid-template-columns: 4rem 1fr; gap: 1rem; align-items: start; padding: 1.2rem;
-      border: 1px solid var(--line); background: color-mix(in srgb, var(--panel) 85%, transparent); }
-    .app img { width: 4rem; height: 4rem; border-radius: 1rem; }
-    .app h3 { margin: 0 0 .3rem; }
-    .app p { margin: 0 0 .6rem; color: var(--muted); font-size: .92rem; }
-    .app .meta { font: .75rem/1.5 var(--mono); color: var(--muted); letter-spacing: .06em; }
-    .steps { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; gap: .8rem; }
-    .steps li { counter-increment: s; padding-left: 2.4rem; position: relative; }
-    .steps li::before { content: counter(s, decimal-leading-zero); position: absolute; left: 0; top: 0; font: 700 1rem/1.5 var(--mono); color: var(--a2); }
-    @media (max-width: 960px) { .apps { grid-template-columns: 1fr; } }
-    pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
-  </style>
+  <link rel="stylesheet" href="repo-ui.css">
   <script>
     window.SITE = {
       defaultTheme: 'fdroid-signal-relay',
@@ -44,55 +23,83 @@
 <body>
   <header class="site-header">
     <a class="brand" href="https://cybercoretech.github.io/" data-brand-phase="0" aria-label="Cybercore Tech home"><span class="brand-emblem">CC</span><span class="brand-name">CYBERCORE <b>/</b> F-DROID<small>APP REPOSITORY</small></span></a>
-    <nav class="main-nav" aria-label="Primary"><a href="#add">ADD</a><a href="#apps">APPS</a><a href="#trust">TRUST</a><a href="#themes">THEMES</a></nav>
+    <nav class="main-nav" aria-label="Primary"><a href="#add">ADD</a><a href="#apps-section">APPS</a><a href="#updates">UPDATES</a><a href="#trust">TRUST</a><a href="#themes">THEMES</a></nav>
     <div class="theme-picker"><span class="theme-label">THEME</span><button id="themeButton" class="theme-button" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="themeMenu">LOADING THEMES…</button><div id="themeMenu" class="theme-menu" role="listbox" aria-label="Theme" hidden></div></div>
   </header>
 
   <main>
     <section class="wrap hero" id="add">
+      <canvas id="radar" aria-hidden="true"></canvas>
       <div>
-        <p class="eyebrow">F-Droid repository · auto-updates · no account</p>
+        <p class="eyebrow">F-Droid repository · auto-updates · no account · no trackers</p>
         <h1><span class="glitch" data-text="CYBER">CYBER</span><br><em>DROID</em></h1>
         <p class="tagline">Every Cybercore app, one tap, kept up to date.</p>
-        <p class="lede">Add this repository to <a href="https://f-droid.org/">F-Droid</a> (or Droid-ify, Neo Store) and get Cybercore apps with automatic updates, straight from the source. The APKs are the <em>exact signed releases</em> published on GitHub, each re-verified against its developer certificate before it's listed.</p>
-        <div class="cta"><a class="btn" href="fdroidrepos://cybercoretech.github.io/fdroid/repo?fingerprint=DE3718769E4C4BE6E26344C7031B88FA9671AF25EA957981552EC420E34FF3C3">ADD TO F-DROID ↗</a><a class="btn ghost" href="#apps">SEE THE APPS</a></div>
-        <p class="fp" style="margin-top:1.2rem">Repository URL<br><b>https://cybercoretech.github.io/fdroid/repo</b><br>Signing fingerprint (SHA-256)<br><b>DE3718769E4C4BE6E26344C7031B88FA9671AF25EA957981552EC420E34FF3C3</b></p>
+        <p class="lede">Add this repository to <a href="https://f-droid.org/">F-Droid</a> (or Droid-ify, Neo Store) and get Cybercore's privacy-first Android apps with automatic updates. Each APK is the <em>exact signed release</em> published on GitHub, re-verified against its developer certificate before it's listed, and the index itself is signed with a key that never touches GitHub.</p>
+        <div class="stats" aria-label="Repository statistics">
+          <div class="stat"><b id="statApps">0</b><span>APPS</span></div>
+          <div class="stat"><b id="statVersions">0</b><span>SIGNED BUILDS</span></div>
+          <div class="stat"><b id="statSize">0</b><span>MB TOTAL</span></div>
+          <div class="stat"><b id="statTrackers">0</b><span>TRACKERS</span></div>
+        </div>
+        <div class="cta"><a class="btn" href="fdroidrepos://cybercoretech.github.io/fdroid/repo?fingerprint=DE3718769E4C4BE6E26344C7031B88FA9671AF25EA957981552EC420E34FF3C3">ADD TO F-DROID ↗</a><a class="btn ghost" href="#apps-section">BROWSE THE APPS</a></div>
       </div>
       <div class="add reveal">
         <div class="qr"><img src="qr.svg" alt="QR code: Cybercore F-Droid repository URL with its signing fingerprint" width="300" height="300"></div>
+        <div>
+          <span class="label">REPOSITORY URL</span>
+          <p class="fp" style="margin:.3rem 0 0;font:.85rem/1.5 var(--mono);color:var(--a3);overflow-wrap:anywhere">https://cybercoretech.github.io/fdroid/repo</p>
+          <span class="label" style="display:block;margin-top:.9rem">SIGNING FINGERPRINT (SHA-256)</span>
+          <div class="fp-grid" id="fpGrid" data-fp="DE3718769E4C4BE6E26344C7031B88FA9671AF25EA957981552EC420E34FF3C3" aria-label="DE3718769E4C4BE6E26344C7031B88FA9671AF25EA957981552EC420E34FF3C3"></div>
+          <div class="copy-row">
+            <button class="chip-btn" type="button" data-copy-text="https://cybercoretech.github.io/fdroid/repo?fingerprint=DE3718769E4C4BE6E26344C7031B88FA9671AF25EA957981552EC420E34FF3C3">COPY REPO LINK</button>
+            <button class="chip-btn" type="button" data-copy-text="DE3718769E4C4BE6E26344C7031B88FA9671AF25EA957981552EC420E34FF3C3">COPY FINGERPRINT</button>
+          </div>
+        </div>
         <ol class="steps">
-          <li><b>On your phone:</b> tap <b>ADD TO F-DROID</b>, or scan the QR code with the F-Droid app (Settings → Repositories → +).</li>
-          <li>Check the fingerprint matches <code>DE37 1876 … 4FF3 C3</code>, then confirm.</li>
-          <li>Search for <b>CyberVault</b>, <b>Cybermeta</b> or <b>Holodrive Photos</b> and install. Updates arrive automatically.</li>
+          <li><b>On your phone:</b> tap <b>ADD TO F-DROID</b>, or in F-Droid open Settings → Repositories → + and scan the QR code.</li>
+          <li>Check the fingerprint starts <code>DE37 1876 9E4C</code>, then confirm.</li>
+          <li>Pick any app below and install it. Updates arrive automatically.</li>
         </ol>
       </div>
     </section>
 
-    <section class="wrap section" id="apps">
-      <div class="section-head reveal"><div><p class="eyebrow">01 / In the repository</p><h2>Three apps,<br><em>zero trackers.</em></h2></div><p>Kotlin + Compose on the outside, shared Rust cores on the inside. Each app links to its source, its own site and its releases.</p></div>
-      <div class="apps">
-        <div class="app reveal"><img src="repo/dev.cybercore.cybervault/en-US/icon.png" onerror="this.src='repo/icons/icon.png'" alt=""><div><h3>CYBERVAULT</h3><p>Offline password vault with Keysmith built in. Same vault format as the desktop app. No internet permission.</p><div class="meta">SECURITY · MIT · <a href="https://cybercoretech.github.io/cybervault-android-app/">SITE ↗</a></div></div></div>
-        <div class="app reveal"><img src="repo/dev.cybercore.cybermeta/en-US/icon.png" onerror="this.src='repo/icons/icon.png'" alt=""><div><h3>CYBERMETA</h3><p>See what your photos give away (GPS, camera, dates) and share clean copies. No internet permission.</p><div class="meta">PRIVACY · MIT · <a href="https://cybercoretech.github.io/cybermeta-android-app/">SITE ↗</a></div></div></div>
-        <div class="app reveal"><img src="repo/dev.cybercore.holodrive.photos/en-US/icon.png" onerror="this.src='repo/icons/icon.png'" alt=""><div><h3>HOLODRIVE PHOTOS</h3><p>Gallery, uploads and Keysmith-protected share links for your self-hosted Holodrive server.</p><div class="meta">MULTIMEDIA · APACHE-2.0 · <a href="https://github.com/cybercoretech/holodrive-android-app">SOURCE ↗</a></div></div></div>
+    <section class="wrap section" id="apps-section">
+      <div class="section-head reveal"><div><p class="eyebrow">01 / In the repository</p><h2><span id="appsTitle">Our apps,</span><br><em>zero trackers.</em></h2></div><p>Kotlin + Compose on the outside, shared Rust cores where it counts. No ads, no analytics, no accounts. Tap any app for its permissions, screenshots, signer and checksums. This list is built live from the signed repository index.</p></div>
+      <div class="toolbar"><input id="appSearch" type="search" placeholder="Search apps…" aria-label="Search apps"><div id="appFilters" class="copy-row" style="margin:0" role="group" aria-label="Filter by category"></div></div>
+      <div class="apps" id="apps" aria-live="polite">
+        <noscript><p class="empty">CyberVault · Cybermeta · Holodrive Photos · Nightwatch · SignalWarden. Add the repository in F-Droid to browse them.</p></noscript>
       </div>
+    </section>
+
+    <section class="wrap section" id="updates">
+      <div class="section-head reveal"><div><p class="eyebrow">02 / Latest builds</p><h2>Fresh off<br><em>the signer.</em></h2></div><p>The newest signed builds in the index. Index last signed <b id="indexStamp">…</b>.</p></div>
+      <ol class="timeline reveal" id="timeline"></ol>
     </section>
 
     <section class="wrap section" id="trust">
-      <div class="section-head reveal"><div><p class="eyebrow">02 / Trust model</p><h2>Two signatures,<br><em>both checked.</em></h2></div><p>F-Droid verifies the repository index signature on every update; Android verifies every APK update against the developer key it was first installed with.</p></div>
+      <div class="section-head reveal"><div><p class="eyebrow">03 / Trust model</p><h2>Two signatures,<br><em>both checked.</em></h2></div><p>F-Droid verifies the repository index signature on every refresh, and Android verifies every APK update against the developer key it was first installed with. Neither key is stored on GitHub.</p></div>
       <div class="pipeline reveal">
-        <div class="step"><h3>RELEASE</h3><p>Each app is built and signed by its developer key. CyberVault's key never leaves the maintainer's machine.</p></div>
-        <div class="step"><h3>VERIFY</h3><p>Before listing, every APK's SHA-256 and signing certificate are re-checked against the published release.</p></div>
-        <div class="step"><h3>INDEX</h3><p><code>fdroidserver</code> builds the index, signed with the repo key (<code>DE37…F3C3</code>), also held only on the maintainer's machine.</p></div>
-        <div class="step"><h3>UPDATE</h3><p>Your phone checks the index signature, then Android checks the APK signature matches the installed app.</p></div>
+        <div class="step"><h3>RELEASE</h3><p>Each app is built and signed with its own developer key on the maintainer's machine, then published on GitHub with its SHA-256.</p></div>
+        <div class="step"><h3>VERIFY</h3><p>Before listing, every APK's checksum and signing certificate are re-checked against the pin in <code>apps.tsv</code>.</p></div>
+        <div class="step"><h3>INDEX</h3><p><code>fdroidserver</code> builds the index and signs it with the repo key <code>DE37…F3C3</code>.</p></div>
+        <div class="step"><h3>UPDATE</h3><p>Your phone checks the index signature, then Android checks the new APK is signed like the installed one.</p></div>
       </div>
-      <ul class="list" style="margin-top:1.2rem"><li><b>Same APKs as GitHub:</b> installing from here, Obtainium or the GitHub release is interchangeable; updates work across all three.</li><li><b>Not the main F-Droid catalog:</b> these builds are signed by Cybercore, not built by F-Droid. Main-catalog listings may follow once builds are reproducible.</li></ul>
+      <div class="grid g2" style="margin-top:1.2rem">
+        <div class="reveal"><span class="label">VERIFY IT YOURSELF</span>
+          <div class="console"><div class="console-head"><span>● ● ● &nbsp; any linux / macos box</span><strong>LIVE</strong></div>
+<pre class="code term" id="verifyTerm" data-lines='["$ curl -fsSLO https://cybercoretech.github.io/fdroid/repo/dev.cybercore.cybervault_1000.apk","$ sha256sum dev.cybercore.cybervault_1000.apk","234aaf112638b74b78f1a279cc75bff4c8d81eda267375541cd07daa2e9759e5","$ apksigner verify --print-certs dev.cybercore.cybervault_1000.apk | grep SHA-256","Signer #1 certificate SHA-256 digest: 9dfa3699b793ad16af999b2fbe99b4b13ee26f8014705cc661521ee2b15e52cb","# matches the CyberVault cert in README + apps.tsv ✓"]'><code></code></pre></div></div>
+        <div class="reveal"><span class="label">GOOD TO KNOW</span>
+          <ul class="list"><li><b>Same APKs as GitHub:</b> installing from here, Obtainium or the GitHub release is interchangeable; updates work across all three.</li><li><b>Self-hosted apps:</b> Holodrive Photos and Nightwatch talk to servers <em>you</em> run (flagged SELF-HOSTED).</li><li><b>Not the main F-Droid catalog:</b> F-Droid doesn't build these APKs; Cybercore signs them. Main-catalog listings may follow once builds are reproducible.</li><li><b>Prefer a computer?</b> Each app's README has a verifying <code>curl … | sh</code> installer for adb.</li></ul></div>
+      </div>
     </section>
 
     <section class="wrap section" id="themes">
-      <div class="section-head reveal"><div><p class="eyebrow">03 / Theme matrix</p><h2>Pick your<br><em>signal.</em></h2></div><p>Every Cybercore palette from the shared schema, plus this repository's <b>signature mashups</b>.</p></div>
+      <div class="section-head reveal"><div><p class="eyebrow">04 / Theme matrix</p><h2>Pick your<br><em>signal.</em></h2></div><p>Every Cybercore palette from the shared schema, plus this repository's <b>signature mashups</b>.</p></div>
       <div class="theme-strip reveal"><div><span class="label">NOW RUNNING · <span id="themeCount">…</span></span><div class="now" data-active-theme>…</div><div class="recipe" id="themeRecipe"></div></div><div></div><div id="swatches"></div></div>
     </section>
   </main>
+
+  <dialog class="app-dialog" id="appDialog" aria-label="App details"></dialog>
 
   <section class="contact-band" aria-label="Contact Cybercore Tech">
     <div class="wrap"><cybercore-contact repo="fdroid"><a href="mailto:dev@cybercoretech.net">dev@cybercoretech.net</a></cybercore-contact></div>
@@ -101,6 +108,7 @@
   <footer><span>CYBERCORE TECH / F-DROID / © <span id="year"></span></span><span><a href="https://cybercoretech.github.io/">CYBERCORETECH.GITHUB.IO</a> · <a href="https://github.com/cybercoretech/fdroid">SOURCE</a></span></footer>
 
   <script src="app.js"></script>
+  <script src="repo-ui.js"></script>
   <script type="module" src="https://cybercoretech.github.io/kit/contact.js"></script>
 </body>
 </html>

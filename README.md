@@ -18,6 +18,9 @@ Works with [F-Droid](https://f-droid.org/), Droid-ify and Neo Store.
 | 🔐 **CyberVault**: offline password vault with Keysmith | `dev.cybercore.cybervault` | MIT | [cybervault-android-app](https://github.com/cybercoretech/cybervault-android-app) |
 | 🖼️ **Cybermeta**: see and strip photo metadata | `dev.cybercore.cybermeta` | MIT | [cybermeta-android-app](https://github.com/cybercoretech/cybermeta-android-app) |
 | 🧊 **Holodrive Photos**: client for your self-hosted Holodrive | `dev.cybercore.holodrive.photos` | Apache-2.0 | [holodrive-android-app](https://github.com/cybercoretech/holodrive-android-app) |
+| 🌙 **Nightwatch**: watch and control your self-hosted services | `dev.cybercore.nightwatch` | MIT | [nightwatch-android-app](https://github.com/cybercoretech/nightwatch-android-app) |
+
+Deep link to an app's details: `https://cybercoretech.github.io/fdroid/#app=<package>`.
 
 ## 🛡️ Trust model
 
@@ -30,10 +33,11 @@ Works with [F-Droid](https://f-droid.org/), Droid-ify and Neo Store.
 Needs `fdroidserver` (`python3 -m venv ~/.local/share/fdroidserver-venv && …/pip install fdroidserver`), `gh`, and the Android build-tools.
 
 ```sh
-tools/publish.sh      # fetch latest releases → verify sha256 + cert pin → add new APKs → re-sign index
+tools/publish.sh      # fetch latest releases → verify sha256 + cert pin → add new APKs → re-sign index → check every referenced file exists
 git status            # review, then commit on a branch and open a PR (Pages serves main)
 ```
 
 - **Add an app:** one line in `apps.tsv` (repo, release asset, application id, cert SHA-256), plus `metadata/<appid>.yml` and an optional `metadata/<appid>/en-US/` with `images/icon.png`, `images/phoneScreenshots/` and `changelogs/<versionCode>.txt`.
+- **Landing page:** `index.html` + `repo-ui.{css,js}` render the app cards, stats and update timeline live from `repo/index-v2.json`, so the page never goes stale.
 - **Keep it small:** `archive_older: 3` keeps the last three versions of each app.
 - **Signing key:** `~/Vaults/android/fdroid-index.{p12,env}`. `config.yml` holds no secrets; it reads `FDROID_KEYSTORE_PASS` and `FDROID_KEY_PASS` from that env file.

@@ -51,5 +51,31 @@ set -a
 # shellcheck source=/dev/null
 . "$KEY_ENV"
 set +a
-"$FDROID" update --use-date-from-apk 2>&1 | grep -v 'unsafe permissions' | grep -E 'ERROR|WARNING|Finished' || true
+# Every file the signed index points at (APKs, icons, screenshots) must exist.
+# fdroidserver has been seen dropping other apps' hashed icon files on the run
+# that adds a new app; a second run restores them. Never commit a broken repo.
+missing_refs() {
+  python3 -I - <<'PY'
+import json, os
+d = json.load(open("repo/index-v2.json"))
+miss = []
+for p in d["packages"].values():
+    m = p["metadata"]
+    refs = [x["name"] for x in m.get("icon", {}).values()]
+    for kind in (m.get("screenshots") or {}).values():
+        for lst in kind.values():
+            refs += [x["name"] for x in lst]
+    refs += [v["file"]["name"] for v in p["versions"].values()]
+    miss += [r for r in refs if not os.path.exists("repo" + r)]
+print("\n".join(miss))
+PY
+}
+for attempt in 1 2; do
+  "$FDROID" update --use-date-from-apk 2>&1 | grep -v 'unsafe permissions' | grep -E 'ERROR|WARNING|Finished' || true
+  missing=$(missing_refs)
+  [[ -z "$missing" ]] && break
+  say "index references missing files (attempt $attempt):"; printf '%s\n' "$missing" | sed 's/^/  /'
+done
+[[ -z "$missing" ]] || die "the index still references missing files; not safe to commit"
+say "Index verified: every referenced APK, icon and screenshot exists."
 say "$added new APK(s). Review 'git status', then commit and open a PR."
