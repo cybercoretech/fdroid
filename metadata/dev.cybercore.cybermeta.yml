@@ -1,0 +1,21 @@
+Categories:
+  - Security
+  - Graphics
+License: MIT
+AuthorName: Cybercore Tech
+AuthorEmail: dev@cybercoretech.net
+WebSite: https://cybercoretech.github.io/cybermeta-android-app/
+SourceCode: https://github.com/cybercoretech/cybermeta-android-app
+IssueTracker: https://github.com/cybercoretech/cybermeta-android-app/issues
+Changelog: https://github.com/cybercoretech/cybermeta-android-app/releases
+
+Name: Cybermeta
+Summary: See what your photos give away, and share clean copies
+Description: |-
+  Shows the metadata hidden in your photos (GPS, camera, dates) and makes
+  clean copies to share or save, using the same Rust scrubber as the desktop
+  cybermeta tool.
+
+  * Clean modes: share-safe, location only, anonymous camera, pixels only, shift dates
+  * Share straight from your gallery to "Clean with Cybermeta"
+  * No internet permission

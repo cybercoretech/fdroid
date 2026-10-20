@@ -1,0 +1,22 @@
+---
+# Cybercore F-Droid repository: https://cybercoretech.github.io/fdroid/repo
+# No secrets here. The index-signing key and its passwords live on Blackbox
+# only (~/Vaults/android/fdroid-index.{p12,env}); tools/publish.sh loads them.
+sdk_path: $ANDROID_HOME
+
+repo_url: https://cybercoretech.github.io/fdroid/repo
+repo_name: Cybercore
+repo_icon: icon.png
+repo_description: >-
+  Apps from Cybercore Tech: privacy-first, offline-first tools with a
+  CYBERGRID look. Every APK here is the exact signed release published on
+  GitHub, re-verified (SHA-256 + developer signing certificate) before it
+  is listed.
+
+archive_older: 3
+
+repo_keyalias: cybercore-fdroid
+keystore: ~/Vaults/android/fdroid-index.p12
+keystorepass: {env: FDROID_KEYSTORE_PASS}
+keypass: {env: FDROID_KEY_PASS}
+keydname: CN=cybercore-fdroid, OU=F-Droid

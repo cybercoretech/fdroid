@@ -1,0 +1,23 @@
+Categories:
+  - Security
+License: MIT
+AuthorName: Cybercore Tech
+AuthorEmail: dev@cybercoretech.net
+WebSite: https://cybercoretech.github.io/cybervault-android-app/
+SourceCode: https://github.com/cybercoretech/cybervault-android-app
+IssueTracker: https://github.com/cybercoretech/cybervault-android-app/issues
+Changelog: https://github.com/cybercoretech/cybervault-android-app/releases
+
+Name: CyberVault
+Summary: Offline password vault with Keysmith built in
+Description: |-
+  An offline password vault with the Keysmith generator built in. It uses
+  the same encrypted vault file format as the desktop CyberVault (Argon2id +
+  ChaCha20-Poly1305), from the same Rust code, so a vault opens on either.
+
+  * No internet permission: your secrets only leave the phone when you export them
+  * Keysmith: random passwords or EFF diceware passphrases with an entropy meter
+  * Export and import the encrypted vault file to move it to and from the desktop
+  * No screenshots, a self-clearing sensitive clipboard, and auto-lock
+
+  There's no recovery if you forget the master password, by design.

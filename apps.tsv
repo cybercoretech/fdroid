@@ -1,0 +1,4 @@
+# github-repo	release-asset	application-id	developer signing cert (SHA-256)
+cybervault-android-app	cybervault.apk	dev.cybercore.cybervault	9dfa3699b793ad16af999b2fbe99b4b13ee26f8014705cc661521ee2b15e52cb
+cybermeta-android-app	cybermeta.apk	dev.cybercore.cybermeta	88390595f5fbf171dc03d040abc8edc2a7fb9e973320b3c4bbe725d4139b283c
+holodrive-android-app	holodrive-photos.apk	dev.cybercore.holodrive.photos	02e0bbab51e85a39db95577bb682f52380001a50fcf64013af5b32efa6178e6e
