@@ -183,6 +183,25 @@
     window.fdroidRepositoryInfo = { ...window.fdroidRepositoryInfo, versionCount: versions, latestApkBytes: bytes, trackerCount: trackerApps };
     window.dispatchEvent(new CustomEvent('fdroid-index-status', { detail: window.fdroidRepositoryStatus }));
     count($('#statApps'), pkgs.length); count($('#statVersions'), versions); count($('#statSize'), bytes / 1e6, 1); count($('#statTrackers'), trackerApps);
+    const pulsePackages = $('#pulsePackages'), pulseVersions = $('#pulseVersions'), pulseSize = $('#pulseSize');
+    const pulseBars = $('#pulseBars'), pulseStamp = $('#pulseStamp');
+    if (pulsePackages && pulseVersions && pulseSize && pulseBars && pulseStamp) {
+      pulsePackages.textContent = String(pkgs.length).padStart(2, '0');
+      pulseVersions.textContent = String(versions).padStart(2, '0');
+      pulseSize.textContent = mb(bytes);
+      const largest = Math.max(...pkgs.map((x) => x.v.file.size), 1);
+      const footprint = [...pkgs].sort((a, b) => b.v.file.size - a.v.file.size);
+      pulseBars.replaceChildren(...footprint.map((x) => {
+        const bar = el('span', { className: 'pulse-bar' });
+        const fill = el('i', { className: 'pulse-bar-fill', 'aria-hidden': 'true' });
+        fill.style.width = `${Math.max(5, x.v.file.size / largest * 100)}%`;
+        bar.append(fill);
+        return el('a', { className: 'pulse-app', href: `#app=${encodeURIComponent(x.id)}`, ariaLabel: `${en(x.m.name)}, ${mb(x.v.file.size)} megabytes, open app details` },
+          el('span', { className: 'pulse-app-name', textContent: en(x.m.name) }), bar,
+          el('b', { className: 'pulse-app-size', textContent: `${mb(x.v.file.size)} MB` }));
+      }));
+      pulseStamp.textContent = index.repo?.timestamp ? new Date(index.repo.timestamp).toISOString().replace('T', ' ').slice(0, 16) + ' UTC' : 'NOT PROVIDED';
+    }
     const word = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'][pkgs.length] || String(pkgs.length);
     $('#appsTitle').textContent = `${word} apps,`;
 

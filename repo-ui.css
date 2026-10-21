@@ -93,6 +93,35 @@ dialog.app-dialog[open] { animation: pop .28s cubic-bezier(.2,.9,.2,1.1); }
 .timeline li::before { content: ""; position: absolute; left: -5px; top: .45rem; width: 9px; height: 9px; background: var(--a2); box-shadow: 0 0 12px var(--a2); }
 .timeline time { font: .7rem/1 var(--mono); letter-spacing: .14em; color: var(--muted); }
 .timeline b { display: block; margin-top: .2rem; }
+.release-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, .9fr); gap: clamp(2rem, 6vw, 5rem); align-items: stretch; }
+.release-pulse { position: relative; display: grid; align-content: start; gap: 1.15rem; min-width: 0; padding: clamp(1.2rem, 3vw, 1.8rem); border: 1px solid color-mix(in srgb, var(--a1) 48%, var(--line)); background: linear-gradient(145deg, color-mix(in srgb, var(--panel) 96%, transparent), color-mix(in srgb, var(--bg) 90%, var(--a1))); box-shadow: inset 0 0 2rem color-mix(in srgb, var(--a1) 5%, transparent), 0 1rem 3rem #0003; overflow: hidden; }
+.release-pulse::before { content: ""; position: absolute; top: 0; left: 0; width: 35%; height: 2px; background: linear-gradient(90deg, var(--a1), var(--a2)); box-shadow: 0 0 1rem var(--a1); }
+.pulse-head { display: flex; justify-content: space-between; align-items: start; gap: 1rem; padding-bottom: .85rem; border-bottom: 1px solid var(--line); }
+.pulse-head .eyebrow { display: block; margin-bottom: .55rem; font-size: .62rem; }
+.pulse-head h3 { font-size: clamp(1.2rem, 2vw, 1.65rem); color: var(--white); }
+.pulse-state { display: inline-flex; align-items: center; gap: .45rem; flex: none; padding: .4rem .55rem; border: 1px solid color-mix(in srgb, var(--a3) 35%, var(--line)); color: var(--a3); font: .57rem/1 var(--mono); letter-spacing: .1em; }
+.pulse-state i { width: .42rem; height: .42rem; border-radius: 50%; background: var(--a3); box-shadow: 0 0 .7rem var(--a3); }
+.pulse-summary { display: grid; gap: .35rem; padding: .2rem 0; }
+.pulse-summary strong { color: var(--a1); font: 700 clamp(2.8rem, 5vw, 4.2rem)/.9 var(--display, var(--mono)); text-shadow: 0 0 1.5rem color-mix(in srgb, var(--a1) 30%, transparent); }
+.pulse-summary > span, .pulse-metrics span, .pulse-label, .pulse-foot { color: var(--muted); font: .62rem/1.5 var(--mono); letter-spacing: .13em; }
+.pulse-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-block: 1px solid var(--line); }
+.pulse-metrics > div { display: grid; gap: .35rem; padding: .8rem .7rem .8rem 0; }
+.pulse-metrics > div + div { padding-left: .9rem; border-left: 1px solid var(--line); }
+.pulse-metrics b { color: var(--a2); font: 700 1.35rem/1 var(--display, var(--mono)); }
+.pulse-footprint { display: grid; gap: .65rem; }
+.pulse-label { display: flex; justify-content: space-between; gap: .8rem; font-size: .55rem; }
+.pulse-bars { display: grid; gap: .55rem; }
+.pulse-app { display: grid; grid-template-columns: minmax(6rem, .9fr) minmax(3rem, 1fr) 3.4rem; align-items: center; gap: .65rem; color: var(--text, var(--white)); text-decoration: none; font: .65rem/1.2 var(--mono); }
+.pulse-app:hover .pulse-app-name, .pulse-app:focus-visible .pulse-app-name { color: var(--a1); }
+.pulse-app-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pulse-bar { height: .36rem; background: color-mix(in srgb, var(--line) 75%, transparent); }
+.pulse-bar-fill { display: block; height: 100%; background: linear-gradient(90deg, var(--a1), var(--a2)); box-shadow: 0 0 .65rem color-mix(in srgb, var(--a1) 30%, transparent); }
+.pulse-app-size { color: var(--muted); font-weight: 400; text-align: right; }
+.pulse-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; padding-top: .75rem; border-top: 1px solid var(--line); font-size: .55rem; }
+.pulse-foot b { color: var(--a3); font-weight: 400; }
+.pulse-note { color: var(--muted); font: .55rem/1.55 var(--mono); letter-spacing: .06em; }
+@media (max-width: 960px) { .release-grid { grid-template-columns: minmax(0, 1fr) minmax(16rem, .85fr); gap: 1.8rem; } }
+@media (max-width: 700px) { .release-grid { grid-template-columns: 1fr; } }
 .term { margin: 0; min-height: 15rem; }
 .term .cursor { display: inline-block; width: .6em; height: 1.05em; vertical-align: text-bottom; background: var(--a1); animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }

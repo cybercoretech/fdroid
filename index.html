@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#07070d">
   <link rel="icon" href="repo/icons/icon.png">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="repo-ui.css?v=2">
+  <link rel="stylesheet" href="repo-ui.css?v=3">
   <link rel="stylesheet" href="boot-system.css">
   <link rel="stylesheet" href="assets/fdroid-react.css?v=6">
   <script>
@@ -100,7 +100,17 @@
 
     <section class="wrap section" id="updates">
       <div class="section-head reveal"><div><p class="eyebrow">02 / Latest builds</p><h2>Fresh off<br><em>the signer.</em></h2></div><p>The newest signed builds in the index. Index last signed <b id="indexStamp">…</b>.</p></div>
-      <ol class="timeline reveal" id="timeline"></ol>
+      <div class="release-grid">
+        <ol class="timeline reveal" id="timeline" aria-label="Latest signed app builds"></ol>
+        <aside class="release-pulse reveal" id="releasePulse" aria-labelledby="releasePulseTitle">
+          <header class="pulse-head"><div><span class="eyebrow">LIVE INDEX TELEMETRY</span><h3 id="releasePulseTitle">Repository pulse</h3></div><span class="pulse-state"><i aria-hidden="true"></i> INDEX LOADED</span></header>
+          <div class="pulse-summary"><strong id="pulsePackages">—</strong><span>APPS WITH CURRENT BUILDS</span></div>
+          <div class="pulse-metrics"><div><b id="pulseVersions">—</b><span>INDEXED BUILDS</span></div><div><b id="pulseSize">—</b><span>MB LATEST APK SET</span></div></div>
+          <div class="pulse-footprint"><div class="pulse-label"><span>DOWNLOAD FOOTPRINT</span><span>PER LATEST APK</span></div><div id="pulseBars" class="pulse-bars"></div></div>
+          <footer class="pulse-foot"><span>INDEX TIMESTAMP</span><b id="pulseStamp">WAITING FOR INDEX…</b></footer>
+          <small class="pulse-note">COUNTS AND APK SIZES FROM REPOSITORY METADATA · F-DROID CLIENTS VERIFY THE INDEX SIGNATURE</small>
+        </aside>
+      </div>
     </section>
 
     <section class="wrap section" id="trust">
@@ -137,7 +147,7 @@
   <footer><span>CYBERCORE TECH / F-DROID / © <span id="year"></span></span><span><a href="https://cybercoretech.github.io/">CYBERCORETECH.GITHUB.IO</a> · <a href="https://github.com/cybercoretech/fdroid">SOURCE</a></span></footer>
 
   <script src="app.js"></script>
-  <script src="repo-ui.js"></script>
+  <script src="repo-ui.js?v=2"></script>
   <script defer src="assets/fdroid-react.js?v=6"></script>
   <script defer src="vendor/anime.umd.min.js"></script>
   <script type="module" src="boot-system.js?v=2"></script>
