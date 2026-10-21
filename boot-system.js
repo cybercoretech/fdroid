@@ -12,6 +12,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let ended = false;
   let finishTimer;
+  const phaseTimers = [];
 
   const showIndex = () => {
     const info = window.fdroidRepositoryInfo;
@@ -26,6 +27,7 @@
     if (ended) return;
     ended = true;
     clearTimeout(finishTimer);
+    phaseTimers.forEach(clearTimeout);
     root.classList.add('boot-leaving');
     setTimeout(() => {
       root.classList.remove('boot-pending', 'boot-leaving');
@@ -38,7 +40,19 @@
   } else {
     panel.removeAttribute('hidden');
     skip?.addEventListener('click', finish, { once: true });
-    finishTimer = setTimeout(finish, 2050);
+    finishTimer = setTimeout(finish, 10_600);
+
+    const bootPhases = [
+      [1500, 'CORE SHELL INITIALIZED · MOUNTING INTERFACE'],
+      [3400, 'CYBERGRID THEME MATRIX · LOADING PALETTES'],
+      [5500, 'REPOSITORY CHANNEL · READING INDEX METADATA'],
+      [7700, 'CLIENT TRUST MODEL · PREPARING F-DROID HANDOFF'],
+      [9400, 'FINAL SYSTEM CHECK · BRINGING PORTAL ONLINE'],
+      [10_050, 'SYSTEM READY · INDEX MAY CONTINUE LOADING'],
+    ];
+    bootPhases.forEach(([delay, message]) => {
+      phaseTimers.push(setTimeout(() => { if (status && !ended) status.textContent = message; }, delay));
+    });
 
     // A CSS/timer fallback guarantees the page is never held for a CDN or animation.
     const anime = window.anime;
@@ -47,16 +61,15 @@
       anime.animate(lines, { opacity: [0, 1], translateX: [-8, 0], delay: anime.stagger(105, { start: 180 }), duration: 300, ease: 'outCubic' });
       const progress = { value: 0 };
       anime.animate(progress, {
-        value: 100, duration: 1750, ease: 'inOutQuad',
+        value: 100, duration: 10_250, ease: 'inOutQuad',
         onUpdate: () => { if (bar) bar.style.width = `${progress.value}%`; },
         onComplete: finish,
       });
     } else {
       lines.forEach((line, i) => setTimeout(() => { line.style.opacity = '1'; }, 180 + i * 105));
-      if (bar) bar.style.transition = 'width 1.7s ease';
+      if (bar) bar.style.transition = 'width 10.2s ease-in-out';
       requestAnimationFrame(() => { if (bar) bar.style.width = '100%'; });
     }
-    setTimeout(() => { if (status && !ended) status.textContent = 'WEB INTERFACE READY · INDEX LOADING IN BACKGROUND'; }, 900);
   }
 
   // Keep touch devices and reduced-motion users on native scrolling.
