@@ -9,6 +9,13 @@
   <link rel="icon" href="repo/icons/icon.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="repo-ui.css">
+  <link rel="stylesheet" href="boot-system.css">
+  <script>
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('boot-pending');
+      window.setTimeout(() => document.documentElement.classList.remove('boot-pending'), 2600);
+    }
+  </script>
   <script>
     window.SITE = {
       defaultTheme: 'fdroid-signal-relay',
@@ -21,6 +28,24 @@
   </script>
 </head>
 <body>
+  <aside class="system-boot" id="systemBoot" role="status" aria-live="polite" aria-label="Cybercore system startup">
+    <div class="boot-panel">
+      <div class="boot-top"><span class="boot-emblem" aria-hidden="true">CC</span><span>CYBERCORE / REPOSITORY SYSTEM</span><span class="boot-channel">PUBLIC CHANNEL</span></div>
+      <div class="boot-core">
+        <p class="boot-kicker">INITIALIZING SECURE DISTRIBUTION</p>
+        <h1>SYSTEM <em>BOOT</em></h1>
+        <p class="boot-subtitle">CYBERCORE F-DROID REPOSITORY</p>
+      </div>
+      <div class="boot-readout" aria-hidden="true">
+        <p data-boot-line><span>01</span> CORE INTERFACE <b>STARTING</b></p>
+        <p data-boot-line><span>02</span> THEME MATRIX <b>LOADING</b></p>
+        <p data-boot-line><span>03</span> REPOSITORY INDEX <b id="bootIndexState">CONNECTING</b></p>
+        <p data-boot-line><span>04</span> CLIENT TRUST MODEL <b>F-DROID SIGNATURE CHECKS</b></p>
+      </div>
+      <div class="boot-progress" aria-hidden="true"><span id="bootProgress"></span></div>
+      <div class="boot-bottom"><span id="bootStatus">PREPARING WEB INTERFACE…</span><button id="bootSkip" type="button">SKIP BOOT <span aria-hidden="true">↗</span></button></div>
+    </div>
+  </aside>
   <header class="site-header">
     <a class="brand" href="https://cybercoretech.github.io/" data-brand-phase="0" aria-label="Cybercore Tech home"><span class="brand-emblem">CC</span><span class="brand-name">CYBERCORE <b>/</b> F-DROID<small>APP REPOSITORY</small></span></a>
     <nav class="main-nav" aria-label="Primary"><a href="#add">ADD</a><a href="#apps-section">APPS</a><a href="#updates">UPDATES</a><a href="#trust">TRUST</a><a href="#themes">THEMES</a></nav>
@@ -109,6 +134,8 @@
 
   <script src="app.js"></script>
   <script src="repo-ui.js"></script>
+  <script defer src="vendor/anime.umd.min.js"></script>
+  <script type="module" src="boot-system.js"></script>
   <script type="module" src="https://cybercoretech.github.io/kit/contact.js"></script>
 </body>
 </html>
