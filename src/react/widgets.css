@@ -11,14 +11,17 @@
 .widget-code { display: block; min-width: 0; margin: .35rem 0 .45rem; color: var(--text, var(--white)); font: .75rem/1.5 var(--mono); overflow-wrap: anywhere; }
 .widget-status-placeholder { display: none; }
 #mouseTrailMount { display: none !important; }
-.stat { position: relative; overflow: visible; z-index: 2; cursor: pointer; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+.stat { position: relative; display: flex; min-height: 8.5rem; flex-direction: column; align-items: flex-start; justify-content: center; gap: .45rem; padding: 1.15rem 1.2rem; overflow: visible; z-index: 2; cursor: pointer; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
 .stat:hover { border-color: color-mix(in srgb, var(--a1) 65%, var(--line)); box-shadow: 0 0 1.25rem color-mix(in srgb, var(--a1) 16%, transparent); transform: translateY(-2px); }
+.stat > b { color: var(--a1); font-size: clamp(2.2rem, 4vw, 3rem); line-height: .95; }
+.stat > span:not(.stat-hint) { color: var(--text, var(--white)); font-size: .7rem; }
+.stat .stat-hint { margin-top: .35rem; color: var(--a2); font: .58rem/1.3 var(--mono); letter-spacing: .13em; }
 .stat-info-mount { position: absolute; inset: 0; z-index: 5; }
 .stat-info-trigger { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; color: transparent; background: transparent; cursor: pointer; }
 .stat-info-trigger:focus-visible { outline: 2px solid var(--a1); outline-offset: -3px; }
 .stat-info-icon { position: absolute; top: .45rem; right: .45rem; display: grid; place-items: center; width: 1.25rem; height: 1.25rem; border: 1px solid var(--line); border-radius: 50%; color: var(--muted); background: color-mix(in srgb, var(--panel) 92%, transparent); font: .72rem/1 var(--mono); transition: color .18s ease, border-color .18s ease, box-shadow .18s ease; }
 .stat-info-trigger:hover .stat-info-icon, .stat-info-trigger:focus-visible .stat-info-icon { color: var(--a1); border-color: var(--a1); box-shadow: 0 0 .8rem color-mix(in srgb, var(--a1) 30%, transparent); }
-.stat-dialog { position: fixed; width: min(27rem, calc(100vw - 2rem)); max-width: none; max-height: min(75vh, 36rem); overflow: auto; margin: auto; padding: 1.35rem; border: 1px solid var(--a1); color: var(--text, var(--white)); background: color-mix(in srgb, var(--bg) 97%, black); box-shadow: 0 1rem 4rem #000c, 0 0 2rem color-mix(in srgb, var(--a1) 18%, transparent); font: .82rem/1.6 var(--sans); }
+.stat-dialog { position: fixed; width: min(34rem, calc(100vw - 2rem)); max-width: none; max-height: min(78vh, 42rem); overflow: auto; margin: auto; padding: clamp(1.2rem, 4vw, 1.8rem); border: 1px solid var(--a1); color: var(--text, var(--white)); background: color-mix(in srgb, var(--bg) 97%, black); box-shadow: 0 1rem 4rem #000c, 0 0 2rem color-mix(in srgb, var(--a1) 18%, transparent); font: .82rem/1.6 var(--sans); }
 .stat-dialog { overscroll-behavior: contain; touch-action: pan-y; }
 .stat-dialog::backdrop { background: #02030ad9; backdrop-filter: blur(5px); }
 html.stat-dialog-open, html.stat-dialog-open body { overflow: hidden; overscroll-behavior: none; }
@@ -26,14 +29,23 @@ html.stat-dialog-open, html.stat-dialog-open body { overflow: hidden; overscroll
 .stat-dialog > b { display: block; padding-right: 2rem; color: var(--a1); font: 700 1.05rem/1.3 var(--display, var(--sans)); }
 .stat-dialog > p { margin: .55rem 0 .8rem; color: var(--muted); }
 .stat-dialog a { color: var(--a1); }
+.stat-dialog-value { display: grid; gap: .15rem; margin: 1rem 0; padding: .85rem 1rem; border: 1px solid var(--line); background: color-mix(in srgb, var(--panel) 80%, transparent); }
+.stat-dialog-value strong { color: var(--a1); font: 700 clamp(1.6rem, 5vw, 2.35rem)/1 var(--display, var(--mono)); }
+.stat-dialog-value span { color: var(--muted); font: .62rem/1.4 var(--mono); letter-spacing: .13em; }
 .stat-dialog-close { position: absolute; top: .65rem; right: .65rem; display: grid; place-items: center; width: 2rem; height: 2rem; border: 1px solid var(--line); color: var(--a1); background: var(--panel); font: 1.2rem/1 var(--mono); cursor: pointer; }
 .stat-dialog-close:hover, .stat-dialog-close:focus-visible { border-color: var(--a2); color: var(--a2); outline: 2px solid transparent; }
-.stat-pop-list, .stat-size-list { display: grid; gap: .35rem; }
-.stat-pop-list { grid-template-columns: 1fr 1fr; }
-.stat-size-list { list-style: none; padding: 0; margin: .5rem 0 0; }
-.stat-size-list li { display: flex; justify-content: space-between; gap: .8rem; border-top: 1px solid var(--line); padding-top: .3rem; }
-.stat-size-list li span { color: var(--muted); white-space: nowrap; }
+.stat-detail-list { display: grid; gap: 0; padding: 0; margin: 1rem 0; list-style: none; }
+.stat-detail-list li { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .65rem 0; border-top: 1px solid var(--line); }
+.stat-detail-list li > a { min-width: 0; color: var(--a1); text-decoration: none; }
+.stat-detail-list li > a:hover { color: var(--a2); }
+.stat-detail-list li b, .stat-detail-list li small { display: block; overflow-wrap: anywhere; }
+.stat-detail-list li b { font-size: .8rem; }
+.stat-detail-list li small { color: var(--muted); font: .6rem/1.4 var(--mono); }
+.stat-detail-list li > span { flex: none; color: var(--muted); font: .68rem/1.4 var(--mono); text-align: right; }
+.stat-data-note { display: block; padding-top: .75rem; border-top: 1px solid var(--line); color: var(--muted); font: .56rem/1.5 var(--mono); letter-spacing: .08em; }
+.stat-empty { color: var(--muted); font-size: .76rem; }
 @media (prefers-reduced-motion: reduce) { .stat { transition: none; } .stat:hover { transform: none; } }
+@media (max-width: 520px) { .stat { min-height: 7.4rem; padding: .9rem; } .stat > b { font-size: 2.1rem; } .stat .stat-hint { font-size: .52rem; } }
 
 /* Repository state follows the same-origin index fetch used by the app list. */
 .repo-status { display: grid; grid-template-columns: .7rem minmax(0, 1fr) auto; gap: .7rem; align-items: center; padding: .7rem .8rem; border: 1px solid var(--line); background: color-mix(in srgb, var(--panel) 82%, transparent); font-family: var(--mono); }

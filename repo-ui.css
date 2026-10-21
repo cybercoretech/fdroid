@@ -1,18 +1,18 @@
 /* Cybercore F-Droid landing page: layout + effects on top of the shared kit (styles.css). */
 :root { --a1: var(--cyan); --a2: var(--pink); --a3: var(--acid); }
-.hero { position: relative; }
+.hero { position: relative; align-items: start; }
 .hero > * { min-width: 0; position: relative; z-index: 1; }
 #radar { position: absolute; inset: -4rem 0 0 0; width: 100%; height: calc(100% + 4rem); z-index: 0; opacity: .55; pointer-events: none; }
 pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
 
 /* ---- stats ------------------------------------------------------------ */
-.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; margin: 1.6rem 0 .4rem; }
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; margin: 1.6rem 0 .4rem; }
 .stat { padding: .9rem 1rem; border: 1px solid var(--line); background: color-mix(in srgb, var(--panel) 80%, transparent); position: relative; overflow: hidden; }
 .stat::after { content: ""; position: absolute; inset: auto 0 0 0; height: 2px; background: linear-gradient(90deg, var(--a1), var(--a2), var(--a3)); transform: scaleX(0); transform-origin: left; transition: transform 1.2s cubic-bezier(.2,.8,.2,1); }
 .stat.on::after { transform: scaleX(1); }
 .stat b { display: block; font: 700 1.9rem/1 var(--display, var(--mono)); color: var(--white, #fff); text-shadow: 0 0 18px color-mix(in srgb, var(--a1) 55%, transparent); }
 .stat span { font: .68rem/1.4 var(--mono); letter-spacing: .18em; color: var(--muted); }
-@media (max-width: 620px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; } }
 
 /* ---- add panel ---------------------------------------------------------- */
 .add { display: grid; gap: 1.2rem; align-content: start; }

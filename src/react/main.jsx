@@ -60,13 +60,23 @@ function StatInfo({ kind }) {
   const dialogRef = useRef(null);
   const apps = packagesFrom(state.index);
   const info = window.fdroidRepositoryInfo || {};
-  const names = apps.map((app) => <a key={app.id} href={`#app=${encodeURIComponent(app.id)}`}>{localized(app.pkg.metadata.name)}</a>);
-  const latestSizeRows = apps.map((app) => <li key={app.id}><a href={`#app=${encodeURIComponent(app.id)}`}>{localized(app.pkg.metadata.name)}</a><span>{(app.version.file.size / 1e6).toFixed(1)} MB</span></li>);
+  const appCount = info.appCount ?? apps.length;
+  const versionCount = info.versionCount ?? apps.reduce((total, app) => total + Object.keys(app.pkg.versions || {}).length, 0);
+  const latestApkBytes = info.latestApkBytes ?? apps.reduce((total, app) => total + app.version.file.size, 0);
+  const trackedApps = apps.filter((app) => app.version.antiFeatures?.Tracking || app.pkg.metadata.antiFeatures?.Tracking);
+  const trackerCount = info.trackerCount ?? trackedApps.length;
+  const indexDate = info.timestamp ? new Date(info.timestamp) : null;
+  const indexDateLabel = indexDate && !Number.isNaN(indexDate.getTime()) ? indexDate.toISOString().slice(0, 10) : 'date unavailable';
+  const appLink = (app) => `#app=${encodeURIComponent(app.id)}`;
+  const appRows = apps.map((app) => <li key={app.id}><a href={appLink(app)}><b>{localized(app.pkg.metadata.name)}</b><small>{app.id}</small></a><span>{app.version.manifest.versionName}</span></li>);
+  const buildRows = apps.map((app) => <li key={app.id}><a href={appLink(app)}><b>{localized(app.pkg.metadata.name)}</b><small>latest {app.version.manifest.versionName}</small></a><span>{Object.keys(app.pkg.versions || {}).length} builds</span></li>);
+  const latestSizeRows = apps.map((app) => <li key={app.id}><a href={appLink(app)}><b>{localized(app.pkg.metadata.name)}</b><small>{app.id}</small></a><span>{(app.version.file.size / 1e6).toFixed(1)} MB</span></li>);
+  const trackerRows = trackedApps.map((app) => <li key={app.id}><a href={appLink(app)}><b>{localized(app.pkg.metadata.name)}</b><small>{app.id}</small></a><span>Tracking</span></li>);
   const items = {
-    apps: { title: 'Apps in this repository', body: <>{info.appCount || apps.length || 0} distinct Android applications, loaded from the current F-Droid index. Choose one to open its manifest-backed details.</>, links: <div className="stat-pop-list">{names}</div> },
-    versions: { title: 'Signed builds', body: <>{info.versionCount || 0} APK versions are listed across {info.appCount || apps.length || 0} apps. F-Droid offers compatible updates from the repository.</>, links: <a href="#updates">VIEW RECENT BUILDS ↗</a> },
-    size: { title: 'Latest APK download size', body: <>About {((info.latestApkBytes || 0) / 1e6).toFixed(1)} MB combined for one latest APK per app. This is download size, not installed storage.</>, links: <ul className="stat-size-list">{latestSizeRows}</ul> },
-    trackers: { title: 'Declared tracker anti-feature', body: <>{info.trackerCount || 0} app listings currently declare F-Droid’s “Tracking” anti-feature. This is metadata—not a live network or code audit. Apps that need your own server are separately identified.</>, links: <a href="#trust">HOW THE LISTING IS VERIFIED ↗</a> },
+    apps: { title: 'Apps in this repository', value: appCount, unit: 'APPS', body: <>{appCount} distinct Android applications are listed in the signed repository index, last updated {indexDateLabel}. Open any app for its manifest, APK, signer and source links.</>, rows: appRows },
+    versions: { title: 'Signed builds', value: versionCount, unit: 'APK VERSIONS', body: <>{versionCount} signed APK versions across {appCount} apps. Each app’s latest indexed build appears below; F-Droid can deliver compatible updates.</>, rows: buildRows },
+    size: { title: 'Latest APK download size', value: `${(latestApkBytes / 1e6).toFixed(1)} MB`, unit: 'LATEST BUILDS COMBINED', body: <>Combined download size for one latest APK per app. This is the transfer size—not installed storage—and does not include older builds.</>, rows: latestSizeRows },
+    trackers: { title: 'Declared tracker anti-feature', value: trackerCount, unit: 'LISTINGS DECLARE TRACKING', body: <>{trackerCount ? 'These listings declare F-Droid’s “Tracking” anti-feature.' : 'No current listing declares F-Droid’s “Tracking” anti-feature.'} This is repository metadata, not a live network or code audit.</>, rows: trackerRows, empty: 'No app currently declares the Tracking anti-feature.' },
   };
   const content = items[kind];
   if (!content) return null;
@@ -84,10 +94,14 @@ function StatInfo({ kind }) {
     </button>
     <dialog className="stat-dialog" ref={dialogRef} aria-label={content.title} onClose={() => { document.documentElement.classList.remove('stat-dialog-open'); window.cybercoreLenis?.start(); }} onClick={(event) => { if (event.target === event.currentTarget || event.target.closest('a')) closeDialog(); }}>
       <button className="stat-dialog-close" type="button" aria-label="Close details" onClick={closeDialog}>×</button>
-      <span className="eyebrow">REPOSITORY METRIC</span>
+      <span className="eyebrow">LIVE FROM THE F-DROID INDEX</span>
       <b>{content.title}</b>
+      <div className="stat-dialog-value"><strong>{content.value}</strong><span>{content.unit}</span></div>
       <p>{content.body}</p>
-      {content.links}
+      {content.rows?.length ? <ul className="stat-detail-list">{content.rows}</ul> : content.empty ? <p className="stat-empty">{content.empty}</p> : null}
+      {kind === 'versions' && <a href="#updates">VIEW RECENT BUILDS ↗</a>}
+      {kind === 'trackers' && <a href="#trust">READ THE TRUST MODEL ↗</a>}
+      <small className="stat-data-note">SOURCE: SIGNED REPOSITORY METADATA · NO VISITOR TRACKING</small>
     </dialog>
   </>;
 }

@@ -8,9 +8,9 @@
   <meta name="theme-color" content="#07070d">
   <link rel="icon" href="repo/icons/icon.png">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="repo-ui.css">
+  <link rel="stylesheet" href="repo-ui.css?v=2">
   <link rel="stylesheet" href="boot-system.css">
-  <link rel="stylesheet" href="assets/fdroid-react.css?v=5">
+  <link rel="stylesheet" href="assets/fdroid-react.css?v=6">
   <script>
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.documentElement.classList.add('boot-pending');
@@ -63,10 +63,10 @@
         <p class="tagline">Every Cybercore app, one tap, kept up to date.</p>
         <p class="lede">Add this repository to <a href="https://f-droid.org/">F-Droid</a> (or Droid-ify, Neo Store) and get Cybercore's privacy-first Android apps with automatic updates. Each APK is the <em>exact signed release</em> published on GitHub, re-verified against its developer certificate before it's listed, and the index itself is signed with a key that never touches GitHub.</p>
         <div class="stats" aria-label="Repository statistics">
-          <div class="stat"><b id="statApps">0</b><span>APPS</span></div>
-          <div class="stat"><b id="statVersions">0</b><span>SIGNED BUILDS</span></div>
-          <div class="stat"><b id="statSize">0</b><span>MB TOTAL</span></div>
-          <div class="stat"><b id="statTrackers">0</b><span>TRACKERS</span></div>
+          <div class="stat"><b id="statApps">0</b><span>APPS</span><span class="stat-hint">VIEW DETAILS ↗</span></div>
+          <div class="stat"><b id="statVersions">0</b><span>SIGNED BUILDS</span><span class="stat-hint">VIEW DETAILS ↗</span></div>
+          <div class="stat"><b id="statSize">0</b><span>MB TOTAL</span><span class="stat-hint">VIEW DETAILS ↗</span></div>
+          <div class="stat"><b id="statTrackers">0</b><span>TRACKERS</span><span class="stat-hint">VIEW DETAILS ↗</span></div>
         </div>
         <div id="repositoryStatusMount" class="widget-mount"></div>
         <div class="cta"><a class="btn" href="fdroidrepos://cybercoretech.github.io/fdroid/repo?fingerprint=DE3718769E4C4BE6E26344C7031B88FA9671AF25EA957981552EC420E34FF3C3">ADD TO F-DROID ↗</a><a class="btn ghost" href="#apps-section">BROWSE THE APPS</a></div>
@@ -138,7 +138,7 @@
 
   <script src="app.js"></script>
   <script src="repo-ui.js"></script>
-  <script defer src="assets/fdroid-react.js?v=5"></script>
+  <script defer src="assets/fdroid-react.js?v=6"></script>
   <script defer src="vendor/anime.umd.min.js"></script>
   <script type="module" src="boot-system.js?v=2"></script>
   <script type="module" src="https://cybercoretech.github.io/kit/contact.js"></script>
