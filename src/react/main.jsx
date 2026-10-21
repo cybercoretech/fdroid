@@ -57,6 +57,7 @@ function RepositoryStatus() {
 
 function StatInfo({ kind }) {
   const state = useRepository();
+  const dialogRef = useRef(null);
   const apps = packagesFrom(state.index);
   const info = window.fdroidRepositoryInfo || {};
   const names = apps.map((app) => <a key={app.id} href={`#app=${encodeURIComponent(app.id)}`}>{localized(app.pkg.metadata.name)}</a>);
@@ -69,7 +70,18 @@ function StatInfo({ kind }) {
   };
   const content = items[kind];
   if (!content) return null;
-  return <details className="stat-info"><summary aria-label={`Show details: ${content.title}`} title={`Open ${content.title}`}><span className="stat-info-icon" aria-hidden="true">i</span></summary><div className="stat-popover"><b>{content.title}</b><p>{content.body}</p>{content.links}</div></details>;
+  return <>
+    <button className="stat-info-trigger" type="button" aria-label={`Show details: ${content.title}`} title={`Open ${content.title}`} onClick={() => dialogRef.current?.showModal()}>
+      <span className="stat-info-icon" aria-hidden="true">i</span>
+    </button>
+    <dialog className="stat-dialog" ref={dialogRef} aria-label={content.title} onClick={(event) => { if (event.target === event.currentTarget) dialogRef.current?.close(); }}>
+      <button className="stat-dialog-close" type="button" aria-label="Close details" onClick={() => dialogRef.current?.close()}>×</button>
+      <span className="eyebrow">REPOSITORY METRIC</span>
+      <b>{content.title}</b>
+      <p>{content.body}</p>
+      {content.links}
+    </dialog>
+  </>;
 }
 
 function SetupAssistant() {
