@@ -1,0 +1,24 @@
+Categories:
+  - Connectivity
+  - System
+License: Apache-2.0
+AuthorName: Cybercore Tech
+AuthorEmail: dev@cybercoretech.net
+WebSite: https://cybercoretech.github.io/signalwarden/
+SourceCode: https://github.com/cybercoretech/signalwarden
+IssueTracker: https://github.com/cybercoretech/signalwarden/issues
+Changelog: https://github.com/cybercoretech/signalwarden/blob/main/CHANGELOG.md
+
+Name: SignalWarden
+Summary: See what your connection is doing, and keep the diagnostics on your phone
+Description: |-
+  Network diagnostics with clear privacy boundaries. SignalWarden shows what
+  Android knows about your active connection, and on demand measures how long
+  DNS, the TCP connect and a certificate-verified TLS handshake take.
+
+  * Transport, validated-internet and metered state, and whether a VPN is active
+  * Interface, addresses, DNS servers, proxy and routes
+  * On-tap latency breakdown: resolver, TCP and TLS, each timed separately
+  * No account, analytics, stored history or SignalWarden server
+
+  It isn't a VPN or packet analyzer, and nothing runs in the background.
