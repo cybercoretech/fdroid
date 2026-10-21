@@ -1,0 +1,27 @@
+Categories:
+  - System
+  - Connectivity
+License: MIT
+AuthorName: Cybercore Tech
+AuthorEmail: dev@cybercoretech.net
+WebSite: https://github.com/cybercoretech/nightwatch-android-app
+SourceCode: https://github.com/cybercoretech/nightwatch-android-app
+IssueTracker: https://github.com/cybercoretech/nightwatch-android-app/issues
+Changelog: https://github.com/cybercoretech/nightwatch-android-app/releases
+
+Name: Nightwatch
+Summary: Watch and control your self-hosted services from your phone
+Description: |-
+  The phone app for nightwatchd, the Cybercore operations gateway. See
+  the status of the services on your own machines and act on them, over
+  your private network or Tailscale.
+
+  * Several hosts, switched from the title bar
+  * Device tokens with three permission tiers; risky actions need biometric confirmation
+  * Instant alerts through your own ntfy server (UnifiedPush), or a check every 15 minutes
+  * No account, no analytics; screenshots are blocked
+
+  Requires nightwatchd running on the machines you want to watch.
+AntiFeatures:
+  NonFreeNet:
+    en-US: Needs nightwatchd, which you host yourself.
