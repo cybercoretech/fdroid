@@ -1,0 +1,24 @@
+name: F-Droid page CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build:react
+      - name: Ensure committed browser bundle is current
+        run: test -s assets/fdroid-react.js && test -s assets/fdroid-react.css && git diff --exit-code -- assets/fdroid-react.js assets/fdroid-react.css

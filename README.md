@@ -40,5 +40,7 @@ git status            # review, then commit on a branch and open a PR (Pages ser
 
 - **Add an app:** one line in `apps.tsv` (repo, release asset, application id, cert SHA-256), plus `metadata/<appid>.yml` and an optional `metadata/<appid>/en-US/` with `images/icon.png`, `images/phoneScreenshots/` and `changelogs/<versionCode>.txt`.
 - **Landing page:** `index.html` + `repo-ui.{css,js}` render the app cards, stats and update timeline live from `repo/index-v2.json`, so the page never goes stale.
+- **Interactive page tools:** React source lives in `src/react/`; run `npm ci && npm run build:react` to rebuild the committed static assets in `assets/fdroid-react.{js,css}`. GitHub Pages serves those assets directly from `main`, so no client-side build service is needed.
+- **Page CI:** GitHub Actions installs the locked dependencies, rebuilds the React bundle, and fails if the committed bundle is stale.
 - **Keep it small:** `archive_older: 3` keeps the last three versions of each app.
 - **Signing key:** `~/Vaults/android/fdroid-index.{p12,env}`. `config.yml` holds no secrets; it reads `FDROID_KEYSTORE_PASS` and `FDROID_KEY_PASS` from that env file.

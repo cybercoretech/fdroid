@@ -166,8 +166,12 @@
   dlg?.addEventListener('close', () => { if (location.hash.startsWith('#app=')) history.replaceState(null, '', location.pathname + location.search); });
 
   // ---- render --------------------------------------------------------------
-  fetch(`${REPO}/index-v2.json`, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((index) => {
+  window.fdroidRepositoryStatus = { state: 'loading', checkedAt: Date.now() };
+  window.dispatchEvent(new CustomEvent('fdroid-index-status', { detail: window.fdroidRepositoryStatus }));
+  fetch(`${REPO}/index-v2.json`, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); }).then((index) => {
     window.fdroidRepositoryInfo = { timestamp: index.repo?.timestamp, appCount: Object.keys(index.packages || {}).length };
+    window.fdroidRepositoryIndex = index;
+    window.fdroidRepositoryStatus = { state: 'online', checkedAt: Date.now(), timestamp: index.repo?.timestamp, appCount: window.fdroidRepositoryInfo.appCount };
     window.dispatchEvent(new Event('fdroid-index-ready'));
     const pkgs = Object.entries(index.packages).map(([id, p]) => {
       const v = Object.values(p.versions).sort((a, b) => b.manifest.versionCode - a.manifest.versionCode)[0];
@@ -175,7 +179,10 @@
     }).sort((a, b) => en(a.m.name).localeCompare(en(b.m.name)));
     const versions = pkgs.reduce((n, x) => n + Object.keys(x.p.versions).length, 0);
     const bytes = pkgs.reduce((n, x) => n + x.v.file.size, 0);
-    count($('#statApps'), pkgs.length); count($('#statVersions'), versions); count($('#statSize'), bytes / 1e6, 1); count($('#statTrackers'), 0);
+    const trackerApps = pkgs.filter((x) => x.v.antiFeatures?.Tracking || x.m.antiFeatures?.Tracking).length;
+    window.fdroidRepositoryInfo = { ...window.fdroidRepositoryInfo, versionCount: versions, latestApkBytes: bytes, trackerCount: trackerApps };
+    window.dispatchEvent(new CustomEvent('fdroid-index-status', { detail: window.fdroidRepositoryStatus }));
+    count($('#statApps'), pkgs.length); count($('#statVersions'), versions); count($('#statSize'), bytes / 1e6, 1); count($('#statTrackers'), trackerApps);
     const word = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'][pkgs.length] || String(pkgs.length);
     $('#appsTitle').textContent = `${word} apps,`;
 
@@ -228,7 +235,9 @@
     addEventListener('hashchange', deep); deep();
     const ts = index.repo.timestamp;
     if (ts) $('#indexStamp').textContent = new Date(ts).toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
-  }).catch(() => {
+  }).catch((error) => {
+    window.fdroidRepositoryStatus = { state: 'offline', checkedAt: Date.now(), error: error?.message || 'Index could not be loaded' };
+    window.dispatchEvent(new CustomEvent('fdroid-index-status', { detail: window.fdroidRepositoryStatus }));
     $('#apps').replaceChildren(el('p', { className: 'empty', textContent: 'COULD NOT LOAD THE REPOSITORY INDEX. THE APPS ARE STILL AVAILABLE IN F-DROID.' }));
   });
 
