@@ -78,6 +78,7 @@
       if (matchMedia('(prefers-reduced-motion: reduce)').matches || !Lenis) return;
       const lenis = new Lenis({ autoRaf: true, anchors: true, respectReducedMotion: true });
       window.cybercoreLenis = lenis;
+      if (window.cybercorePageScrollLock?.locked) lenis.stop();
       root.classList.add('lenis');
     }).catch(() => { /* native browser scrolling is the intentional fallback */ });
   }

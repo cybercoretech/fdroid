@@ -63,7 +63,12 @@
   /* ---------- dark categorized theme menu ---------- */
   const button = $('#themeButton');
   const menu = $('#themeMenu');
-  function closeMenu() { if (!menu) return; menu.hidden = true; button.setAttribute('aria-expanded', 'false'); }
+  function closeMenu() {
+    if (!menu || menu.hidden) return;
+    menu.hidden = true;
+    button.setAttribute('aria-expanded', 'false');
+    window.cybercorePageScrollLock?.unlock('theme-menu');
+  }
   function syncMenu(name) {
     if (!menu) return;
     const mash = SITE.mashups.find(m => m.id === name);
@@ -95,6 +100,8 @@
   if (button && menu) {
     button.addEventListener('click', () => {
       const opening = menu.hidden; menu.hidden = !opening; button.setAttribute('aria-expanded', String(opening));
+      if (opening) window.cybercorePageScrollLock?.lock('theme-menu');
+      else window.cybercorePageScrollLock?.unlock('theme-menu');
       // Scroll only the menu to the current theme; scrollIntoView would also
       // scroll the page (and move targets under the pointer mid-click).
       const current = opening && menu.querySelector('[aria-selected="true"]');

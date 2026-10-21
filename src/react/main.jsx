@@ -84,15 +84,14 @@ function StatInfo({ kind }) {
     const dialog = dialogRef.current;
     if (!dialog || dialog.open) return;
     dialog.showModal();
-    document.documentElement.classList.add('stat-dialog-open');
-    window.cybercoreLenis?.stop();
+    window.cybercorePageScrollLock?.lock('stat-dialog');
   };
   const closeDialog = () => dialogRef.current?.close();
   return <>
     <button className="stat-info-trigger" type="button" aria-label={`Show details: ${content.title}`} title={`Open ${content.title}`} onClick={openDialog}>
       <span className="stat-info-icon" aria-hidden="true">i</span>
     </button>
-    <dialog className="stat-dialog" ref={dialogRef} aria-label={content.title} onClose={() => { document.documentElement.classList.remove('stat-dialog-open'); window.cybercoreLenis?.start(); }} onClick={(event) => { if (event.target === event.currentTarget || event.target.closest('a')) closeDialog(); }}>
+    <dialog className="stat-dialog" ref={dialogRef} aria-label={content.title} onClose={() => window.cybercorePageScrollLock?.unlock('stat-dialog')} onClick={(event) => { if (event.target === event.currentTarget || event.target.closest('a')) closeDialog(); }}>
       <button className="stat-dialog-close" type="button" aria-label="Close details" onClick={closeDialog}>×</button>
       <span className="eyebrow">LIVE FROM THE F-DROID INDEX</span>
       <b>{content.title}</b>

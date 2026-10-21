@@ -161,9 +161,13 @@
         link(`${REPO}${v.file.name}`, 'DOWNLOAD APK ↓', 'btn'),
         link(m.sourceCode, 'SOURCE ↗'), m.webSite !== m.sourceCode ? link(m.webSite, 'SITE ↗') : null, link(m.changelog, 'RELEASES ↗'))));
     dlg.showModal();
+    window.cybercorePageScrollLock?.lock('app-details');
   };
   dlg?.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
-  dlg?.addEventListener('close', () => { if (location.hash.startsWith('#app=')) history.replaceState(null, '', location.pathname + location.search); });
+  dlg?.addEventListener('close', () => {
+    window.cybercorePageScrollLock?.unlock('app-details');
+    if (location.hash.startsWith('#app=')) history.replaceState(null, '', location.pathname + location.search);
+  });
 
   // ---- render --------------------------------------------------------------
   window.fdroidRepositoryStatus = { state: 'loading', checkedAt: Date.now() };

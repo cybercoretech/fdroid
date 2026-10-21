@@ -24,7 +24,6 @@
 .stat-dialog { position: fixed; width: min(34rem, calc(100vw - 2rem)); max-width: none; max-height: min(78vh, 42rem); overflow: auto; margin: auto; padding: clamp(1.2rem, 4vw, 1.8rem); border: 1px solid var(--a1); color: var(--text, var(--white)); background: color-mix(in srgb, var(--bg) 97%, black); box-shadow: 0 1rem 4rem #000c, 0 0 2rem color-mix(in srgb, var(--a1) 18%, transparent); font: .82rem/1.6 var(--sans); }
 .stat-dialog { overscroll-behavior: contain; touch-action: pan-y; }
 .stat-dialog::backdrop { background: #02030ad9; backdrop-filter: blur(5px); }
-html.stat-dialog-open, html.stat-dialog-open body { overflow: hidden; overscroll-behavior: none; }
 .stat-dialog > .eyebrow { display: block; margin-bottom: .6rem; color: var(--a2); }
 .stat-dialog > b { display: block; padding-right: 2rem; color: var(--a1); font: 700 1.05rem/1.3 var(--display, var(--sans)); }
 .stat-dialog > p { margin: .55rem 0 .8rem; color: var(--muted); }

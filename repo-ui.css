@@ -65,7 +65,7 @@ pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
 .empty { padding: 2rem; border: 1px dashed var(--line); color: var(--muted); font-family: var(--mono); text-align: center; }
 
 /* ---- detail dialog ------------------------------------------------------ */
-dialog.app-dialog { width: min(56rem, calc(100vw - 2rem)); max-height: calc(100vh - 2rem); padding: 0; border: 1px solid var(--a1); color: inherit;
+dialog.app-dialog { width: min(56rem, calc(100vw - 2rem)); max-height: calc(100vh - 2rem); padding: 0; border: 1px solid var(--a1); color: inherit; overflow: auto; overscroll-behavior: contain; touch-action: pan-y;
   background: color-mix(in srgb, var(--bg, #07070d) 96%, transparent); box-shadow: 0 0 60px color-mix(in srgb, var(--a1) 25%, transparent); }
 dialog.app-dialog::backdrop { background: #000a; backdrop-filter: blur(4px); }
 dialog.app-dialog[open] { animation: pop .28s cubic-bezier(.2,.9,.2,1.1); }
@@ -93,6 +93,7 @@ dialog.app-dialog[open] { animation: pop .28s cubic-bezier(.2,.9,.2,1.1); }
 .timeline li::before { content: ""; position: absolute; left: -5px; top: .45rem; width: 9px; height: 9px; background: var(--a2); box-shadow: 0 0 12px var(--a2); }
 .timeline time { font: .7rem/1 var(--mono); letter-spacing: .14em; color: var(--muted); }
 .timeline b { display: block; margin-top: .2rem; }
+html.overlay-scroll-locked, html.overlay-scroll-locked body { overflow: hidden; overscroll-behavior: none; }
 .release-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, .9fr); gap: clamp(2rem, 6vw, 5rem); align-items: stretch; }
 .release-pulse { position: relative; display: grid; align-content: start; gap: 1.15rem; min-width: 0; padding: clamp(1.2rem, 3vw, 1.8rem); border: 1px solid color-mix(in srgb, var(--a1) 48%, var(--line)); background: linear-gradient(145deg, color-mix(in srgb, var(--panel) 96%, transparent), color-mix(in srgb, var(--bg) 90%, var(--a1))); box-shadow: inset 0 0 2rem color-mix(in srgb, var(--a1) 5%, transparent), 0 1rem 3rem #0003; overflow: hidden; }
 .release-pulse::before { content: ""; position: absolute; top: 0; left: 0; width: 35%; height: 2px; background: linear-gradient(90deg, var(--a1), var(--a2)); box-shadow: 0 0 1rem var(--a1); }
