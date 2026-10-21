@@ -54,7 +54,8 @@
       phaseTimers.push(setTimeout(() => { if (status && !ended) status.textContent = message; }, delay));
     });
 
-    // A CSS/timer fallback guarantees the page is never held for a CDN or animation.
+    // The timeout is the minimum display duration; animation completion cannot
+    // dismiss the screen early. The CSS/timer path works without Anime.js.
     const anime = window.anime;
     if (anime?.animate) {
       anime.animate('.boot-core', { opacity: [0, 1], translateY: [12, 0], duration: 430, ease: 'outCubic' });
@@ -63,7 +64,6 @@
       anime.animate(progress, {
         value: 100, duration: 10_250, ease: 'inOutQuad',
         onUpdate: () => { if (bar) bar.style.width = `${progress.value}%`; },
-        onComplete: finish,
       });
     } else {
       lines.forEach((line, i) => setTimeout(() => { line.style.opacity = '1'; }, 180 + i * 105));
