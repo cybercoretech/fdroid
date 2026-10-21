@@ -40,15 +40,15 @@
   } else {
     panel.removeAttribute('hidden');
     skip?.addEventListener('click', finish, { once: true });
-    finishTimer = setTimeout(finish, 10_600);
+    finishTimer = setTimeout(finish, 5_000);
 
     const bootPhases = [
-      [1500, 'CORE SHELL INITIALIZED · MOUNTING INTERFACE'],
-      [3400, 'CYBERGRID THEME MATRIX · LOADING PALETTES'],
-      [5500, 'REPOSITORY CHANNEL · READING INDEX METADATA'],
-      [7700, 'CLIENT TRUST MODEL · PREPARING F-DROID HANDOFF'],
-      [9400, 'FINAL SYSTEM CHECK · BRINGING PORTAL ONLINE'],
-      [10_050, 'SYSTEM READY · INDEX MAY CONTINUE LOADING'],
+      [700, 'CORE SHELL INITIALIZED · MOUNTING INTERFACE'],
+      [1_500, 'CYBERGRID THEME MATRIX · LOADING PALETTES'],
+      [2_350, 'REPOSITORY CHANNEL · READING INDEX METADATA'],
+      [3_150, 'CLIENT TRUST MODEL · PREPARING F-DROID HANDOFF'],
+      [3_900, 'FINAL SYSTEM CHECK · BRINGING PORTAL ONLINE'],
+      [4_550, 'SYSTEM READY · INDEX MAY CONTINUE LOADING'],
     ];
     bootPhases.forEach(([delay, message]) => {
       phaseTimers.push(setTimeout(() => { if (status && !ended) status.textContent = message; }, delay));
@@ -61,13 +61,13 @@
       anime.animate(lines, { opacity: [0, 1], translateX: [-8, 0], delay: anime.stagger(105, { start: 180 }), duration: 300, ease: 'outCubic' });
       const progress = { value: 0 };
       anime.animate(progress, {
-        value: 100, duration: 10_250, ease: 'inOutQuad',
+        value: 100, duration: 4_800, ease: 'inOutQuad',
         onUpdate: () => { if (bar) bar.style.width = `${progress.value}%`; },
         onComplete: finish,
       });
     } else {
       lines.forEach((line, i) => setTimeout(() => { line.style.opacity = '1'; }, 180 + i * 105));
-      if (bar) bar.style.transition = 'width 10.2s ease-in-out';
+      if (bar) bar.style.transition = 'width 4.8s ease-in-out';
       requestAnimationFrame(() => { if (bar) bar.style.width = '100%'; });
     }
   }

@@ -14,7 +14,7 @@
   <script>
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.documentElement.classList.add('boot-pending');
-      window.setTimeout(() => document.documentElement.classList.remove('boot-pending'), 12000);
+      window.setTimeout(() => document.documentElement.classList.remove('boot-pending'), 5000);
     }
   </script>
   <script>
@@ -140,7 +140,7 @@
   <script src="repo-ui.js"></script>
   <script defer src="assets/fdroid-react.js?v=5"></script>
   <script defer src="vendor/anime.umd.min.js"></script>
-  <script type="module" src="boot-system.js"></script>
+  <script type="module" src="boot-system.js?v=2"></script>
   <script type="module" src="https://cybercoretech.github.io/kit/contact.js"></script>
 </body>
 </html>
