@@ -2,6 +2,7 @@ keystore.p12
 *.p12
 *.jks
 *.env
+node_modules/
 tmp/
 build/
 .fdroid*

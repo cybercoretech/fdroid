@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="repo-ui.css">
   <link rel="stylesheet" href="boot-system.css">
+  <link rel="stylesheet" href="assets/fdroid-react.css?v=1">
   <script>
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.documentElement.classList.add('boot-pending');
@@ -55,6 +56,7 @@
   <main>
     <section class="wrap hero" id="add">
       <canvas id="radar" aria-hidden="true"></canvas>
+      <div id="mouseTrailMount" aria-hidden="true"></div>
       <div>
         <p class="eyebrow">F-Droid repository · auto-updates · no account · no trackers</p>
         <h1><span class="glitch" data-text="CYBER">CYBER</span><br><em>DROID</em></h1>
@@ -66,6 +68,7 @@
           <div class="stat"><b id="statSize">0</b><span>MB TOTAL</span></div>
           <div class="stat"><b id="statTrackers">0</b><span>TRACKERS</span></div>
         </div>
+        <div id="repositoryStatusMount" class="widget-mount"></div>
         <div class="cta"><a class="btn" href="fdroidrepos://cybercoretech.github.io/fdroid/repo?fingerprint=DE3718769E4C4BE6E26344C7031B88FA9671AF25EA957981552EC420E34FF3C3">ADD TO F-DROID ↗</a><a class="btn ghost" href="#apps-section">BROWSE THE APPS</a></div>
       </div>
       <div class="add reveal">
@@ -80,11 +83,8 @@
             <button class="chip-btn" type="button" data-copy-text="DE3718769E4C4BE6E26344C7031B88FA9671AF25EA957981552EC420E34FF3C3">COPY FINGERPRINT</button>
           </div>
         </div>
-        <ol class="steps">
-          <li><b>On your phone:</b> tap <b>ADD TO F-DROID</b>, or in F-Droid open Settings → Repositories → + and scan the QR code.</li>
-          <li>Check the fingerprint starts <code>DE37 1876 9E4C</code>, then confirm.</li>
-          <li>Pick any app below and install it. Updates arrive automatically.</li>
-        </ol>
+        <noscript><p>In F-Droid, open Repositories → +, scan the QR code, and verify the fingerprint shown above before adding this source.</p></noscript>
+        <div id="setupAssistantMount" class="widget-mount"></div>
       </div>
     </section>
 
@@ -94,6 +94,8 @@
       <div class="apps" id="apps" aria-live="polite">
         <noscript><p class="empty">CyberVault · Cybermeta · Holodrive Photos · Nightwatch · SignalWarden. Add the repository in F-Droid to browse them.</p></noscript>
       </div>
+      <div class="section-head widget-heading"><div><p class="eyebrow">01B / Permission lab</p><h2>Compare before<br><em>you install.</em></h2></div><p>Compare permissions from each app’s current repository manifest. This is a manifest comparison, not a runtime behavior audit.</p></div>
+      <div id="permissionCompareMount" class="widget-mount"></div>
     </section>
 
     <section class="wrap section" id="updates">
@@ -116,6 +118,8 @@
         <div class="reveal"><span class="label">GOOD TO KNOW</span>
           <ul class="list"><li><b>Same APKs as GitHub:</b> installing from here, Obtainium or the GitHub release is interchangeable; updates work across all three.</li><li><b>Self-hosted apps:</b> Holodrive Photos and Nightwatch talk to servers <em>you</em> run (flagged SELF-HOSTED).</li><li><b>Not the main F-Droid catalog:</b> F-Droid doesn't build these APKs; Cybercore signs them. Main-catalog listings may follow once builds are reproducible.</li><li><b>Prefer a computer?</b> Each app's README has a verifying <code>curl … | sh</code> installer for adb.</li></ul></div>
       </div>
+      <div class="section-head widget-heading"><div><p class="eyebrow">03B / Package verification</p><h2>Follow the<br><em>trust chain.</em></h2></div><p>Choose an app to see its published APK hash and Android signer alongside the repository’s signing identity.</p></div>
+      <div id="trustExplorerMount" class="widget-mount"></div>
     </section>
 
     <section class="wrap section" id="themes">
@@ -134,6 +138,7 @@
 
   <script src="app.js"></script>
   <script src="repo-ui.js"></script>
+  <script defer src="assets/fdroid-react.js?v=1"></script>
   <script defer src="vendor/anime.umd.min.js"></script>
   <script type="module" src="boot-system.js"></script>
   <script type="module" src="https://cybercoretech.github.io/kit/contact.js"></script>
