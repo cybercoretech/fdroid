@@ -167,6 +167,8 @@
 
   // ---- render --------------------------------------------------------------
   fetch(`${REPO}/index-v2.json`, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((index) => {
+    window.fdroidRepositoryInfo = { timestamp: index.repo?.timestamp, appCount: Object.keys(index.packages || {}).length };
+    window.dispatchEvent(new Event('fdroid-index-ready'));
     const pkgs = Object.entries(index.packages).map(([id, p]) => {
       const v = Object.values(p.versions).sort((a, b) => b.manifest.versionCode - a.manifest.versionCode)[0];
       return { id, p, v, m: p.metadata, cats: p.metadata.categories || [] };
