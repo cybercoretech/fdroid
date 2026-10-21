@@ -1,9 +1,22 @@
 /* Cybercore F-Droid landing page: layout + effects on top of the shared kit (styles.css). */
-:root { --a1: var(--cyan); --a2: var(--pink); --a3: var(--acid); }
-.hero { position: relative; align-items: start; }
+:root { --a1: var(--cyan); --a2: var(--pink); --a3: var(--acid); --droid-cyan: #58ded8; --droid-mint: #a4cfc4; --droid-edge: #263640; --droid-surface: #0c1219; }
+body { background: radial-gradient(54rem 40rem at 84% 30%, #16323a55, transparent 68%), linear-gradient(145deg, #080b11, #0a0f15 58%, #080b10); }
+body::before { opacity: .28; background-size: 56px 56px; mask-image: radial-gradient(ellipse at 70% 18%, #000 0%, transparent 78%); }
+body::after { opacity: .025; }
+.hero { position: relative; align-items: start; isolation: isolate; }
+.hero::before { content:""; position:absolute; z-index:0; inset:-1.5rem calc((100vw - 100%)/-2) 0; pointer-events:none; background:linear-gradient(90deg,#080b11 0%,#080b1140 43%,#080b116b 100%),url("assets/cyberdroid/cyberdroid-hero-v2.webp") center/cover no-repeat; opacity:.78; mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 100%); }
 .hero > * { min-width: 0; position: relative; z-index: 1; }
-#radar { position: absolute; inset: -4rem 0 0 0; width: 100%; height: calc(100% + 4rem); z-index: 0; opacity: .55; pointer-events: none; }
+.unit-mark { position: absolute !important; top: .1rem; right: 0; z-index: 2 !important; display: flex; align-items: center; gap: .75rem; margin: 0; padding: .35rem .55rem; border-bottom: 1px solid #314750; color: #a8c5ca; background: #080d14a8; font: .56rem/1.2 var(--mono); letter-spacing: .13em; }
+.unit-mark b { color: #59d8d4; font-weight: 400; }
+#radar { position: absolute; inset: -4rem 0 0 0; width: 100%; height: calc(100% + 4rem); z-index: 0; opacity: .2; pointer-events: none; }
 pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* CyberDroid identity: clean instrument typography, graphite surfaces, quiet cyan. */
+.hero h1.cyberdroid-wordmark { display: grid; width: max-content; max-width: 100%; gap: .04em; margin: 1.2rem 0 .6rem; line-height: .88; font: 700 clamp(3.6rem, 8vw, 7.5rem)/.9 var(--display); letter-spacing: .025em; }
+.cyberdroid-wordmark span:first-child { color: #e6edf0; }
+.cyberdroid-wordmark span:last-child { color: transparent; background: linear-gradient(100deg, #e1eaed 0%, #94bec6 52%, #53e2dc 100%); -webkit-background-clip: text; background-clip: text; }
+.brand-emblem { filter: none; }
+.boot-emblem { filter: none; }
 
 /* ---- stats ------------------------------------------------------------ */
 .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; margin: 1.6rem 0 .4rem; }
@@ -135,3 +148,57 @@ html.overlay-scroll-locked, html.overlay-scroll-locked body { overflow: hidden; 
   .app, .app.in { transition: none; opacity: 1; translate: 0 0; transform: none; }
   dialog.app-dialog[open] { animation: none; }
 }
+
+@media (max-width: 620px) {
+  .hero::before { opacity: .28; }
+  .unit-mark { display: none; }
+}
+
+/* Shared card language across repository, comparison, setup, and trust panels. */
+.stats .stat, .card, .app, .release-pulse, .step, .theme-strip, .fact, .empty,
+.widget-card, .app-pick, .trust-stages li, .verification-command, .compare-filter,
+.compare-scroll, .stat-dialog, .stat-detail-list {
+  border-color: var(--droid-edge);
+  background-color: #0d141b;
+  box-shadow: inset 0 1px 0 #d6f3f20a, 0 .8rem 2rem #0002;
+}
+.card, .app, .release-pulse, .widget-card, .app-pick, .stat-dialog {
+  background-image: linear-gradient(145deg, #111a22, #0b1118 76%);
+}
+.card::after { height: 1px; background: linear-gradient(90deg, var(--droid-cyan), #8aa8ad55 48%, transparent 82%); opacity: .68; transform: scaleX(.42); }
+.card:hover { border-color: #48616b; box-shadow: 0 1rem 2.5rem #0005, inset 0 1px 0 #d6f3f210; }
+.card:hover::after { transform: scaleX(.8); }
+.card .num, .step::before { color: var(--droid-cyan); }
+.app { border-radius: 4px; transform: none; transform-style: flat; }
+.app::before { background: linear-gradient(125deg, #74dce10a, transparent 44%); }
+.app:hover, .app:focus-visible { border-color: #597580; box-shadow: 0 1rem 2.5rem #0006, inset 0 1px 0 #d6f3f212; }
+.app-icon::after { border-color: #536a72; box-shadow: none; opacity: .78; }
+.app:hover .app-icon::after { border-color: var(--droid-cyan); opacity: 1; }
+.app h3, .pulse-head h3, .dlg-head h2 { font-family: var(--display); letter-spacing: .015em; }
+.app-foot { border-top-style: solid; border-top-color: #263640; }
+.app-foot b, .pulse-foot b { color: var(--droid-mint); }
+.badge.ver, .badge.offline, .badge.net, .badge.self { color: #a7c5ca; border-color: #354b55; }
+.stat { border-radius: 3px; }
+.stat::after { background: linear-gradient(90deg, var(--droid-cyan), #93b8bd 54%, transparent); opacity: .62; height: 1px; }
+.stat b, .stat>b { color: #dce8eb; text-shadow: none; }
+.stat-hint, .stat .stat-hint { color: #8eabb3; }
+.release-pulse { border-color: var(--droid-edge); background: linear-gradient(145deg, #101820, #0b1118 72%); }
+.release-pulse::before { background: linear-gradient(90deg, var(--droid-cyan), #8aa8ad66, transparent); box-shadow: none; }
+.pulse-state { border-color: #3d5b61; color: var(--droid-mint); }
+.pulse-state i { background: var(--droid-cyan); box-shadow: none; }
+.pulse-summary strong, .pulse-metrics b { color: #b8d7dc; text-shadow: none; }
+.pulse-bar-fill { background: linear-gradient(90deg, #4ccbc9, #9dbdc1); box-shadow: none; }
+.steps li::before { color: var(--droid-cyan); }
+.timeline li::before { background: var(--droid-cyan); box-shadow: none; }
+.btn { background: linear-gradient(110deg, #b3d2d3, #59d5d1); color: #071116; }
+.btn:hover { filter: brightness(1.06); }
+.btn.ghost:hover { box-shadow: inset 0 0 0 1px #64868d; color: #b5d8da; }
+.qr { box-shadow: 0 0 0 1px #41535a, 0 1.5rem 3rem #0005; }
+.chip-btn:hover, .chip-btn:focus-visible, .widget-copy:hover, .widget-copy:focus-visible,
+.widget-action:hover, .widget-action:focus-visible { border-color: #66858e; color: #c2e8e7; box-shadow: none; }
+.widget-copy, .widget-action { border-color: #354b55; color: #a6cbd0; background: #0d141b; }
+.widget-headingline h3, .widget-card h3 { font-family: var(--display); letter-spacing: .01em; }
+.widget-index, .stat-data-note, .stat-empty { color: #8eabb3; }
+.status-lamp { box-shadow: none; }
+dialog.app-dialog { border-color: #40545c; box-shadow: 0 1.5rem 4rem #0009; }
+.empty { border-style: solid; }

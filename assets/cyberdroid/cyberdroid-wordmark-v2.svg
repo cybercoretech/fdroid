@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 270" role="img" aria-labelledby="title desc">
+  <title id="title">CyberDroid</title>
+  <desc id="desc">A sleek titanium and cyan CyberDroid wordmark for the Cybercore F-Droid repository.</desc>
+  <defs>
+    <linearGradient id="titleMetal" x1="210" y1="0" x2="770" y2="270" gradientUnits="userSpaceOnUse"><stop stop-color="#f3f7f8"/><stop offset=".58" stop-color="#c2d6dc"/><stop offset="1" stop-color="#62e2dc"/></linearGradient>
+    <linearGradient id="cyanRule" x1="0" y1="0" x2="1000" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#42ddd6"/><stop offset=".75" stop-color="#6ea1b4"/><stop offset="1" stop-color="#314b57"/></linearGradient>
+  </defs>
+  <path d="M32 20h936" stroke="#263843" stroke-width="2"/><path d="M32 20h168" stroke="url(#cyanRule)" stroke-width="3"/>
+  <g fill="#d5e0e3" font-family="Orbitron, Oxanium, Arial, sans-serif" font-size="104" font-weight="700" letter-spacing="8">
+    <text x="36" y="118">CYBER</text>
+  </g>
+  <g fill="url(#titleMetal)" font-family="Orbitron, Oxanium, Arial, sans-serif" font-size="118" font-weight="700" letter-spacing="7">
+    <text x="32" y="242">DROID</text>
+  </g>
+  <path d="M32 256h936" stroke="#263843" stroke-width="2"/><path d="M800 256h168" stroke="url(#cyanRule)" stroke-width="3"/>
+  <path d="M908 128h40m-20-20v40" stroke="#4ddcd4" stroke-width="2" opacity=".7"/>
+</svg>

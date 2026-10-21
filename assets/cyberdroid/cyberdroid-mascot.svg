@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 720" role="img" aria-labelledby="title desc">
+  <title id="title">CyberDroid, Cybercore repository guardian</title>
+  <desc id="desc">An original armored cybernetic courier with a split optical visor, layered graphite plating, and a cyan reactor core.</desc>
+  <defs>
+    <linearGradient id="shell" x1="105" y1="80" x2="530" y2="650" gradientUnits="userSpaceOnUse"><stop stop-color="#a7c4ce"/><stop offset=".18" stop-color="#435864"/><stop offset=".46" stop-color="#1b2934"/><stop offset=".76" stop-color="#101b25"/><stop offset="1" stop-color="#667c83"/></linearGradient>
+    <linearGradient id="face" x1="200" y1="170" x2="440" y2="470" gradientUnits="userSpaceOnUse"><stop stop-color="#263943"/><stop offset=".55" stop-color="#0b151d"/><stop offset="1" stop-color="#17252e"/></linearGradient>
+    <linearGradient id="visor" x1="178" y1="268" x2="455" y2="330" gradientUnits="userSpaceOnUse"><stop stop-color="#00f0d8"/><stop offset=".46" stop-color="#9effd5"/><stop offset=".72" stop-color="#65d9ff"/><stop offset="1" stop-color="#8f83ff"/></linearGradient>
+    <radialGradient id="reactor"><stop stop-color="#eafffc"/><stop offset=".15" stop-color="#98fff0"/><stop offset=".35" stop-color="#00e8d2"/><stop offset=".72" stop-color="#0382a7"/><stop offset="1" stop-color="#101e2b"/></radialGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="15"/></filter>
+    <filter id="smallGlow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5"/></filter>
+  </defs>
+  <!-- hard-edged shoulder chassis -->
+  <path d="M91 673 112 559l65-62 49-26 9-42h161l10 42 57 27 63 61 25 114H91Z" fill="#00e8d2" opacity=".2" filter="url(#soft)"/>
+  <path d="m64 678 22-117 83-63 65-27 13-45h146l14 45 65 27 83 63 23 117H64Z" fill="url(#shell)" stroke="#7b9299" stroke-width="5" stroke-linejoin="round"/>
+  <path d="m87 650 21-82 76-48 47-17-6 64-58 19-18 64H87Zm466 0-21-82-76-48-47-17 6 64 58 19 18 64h62Z" fill="#0b141d" stroke="#31464f" stroke-width="4"/>
+  <path d="m101 574 81-44 24 7-29 22-62 38m384-23-81-44-24 7 29 22 62 38" fill="none" stroke="#63b6ba" stroke-width="4" opacity=".75"/>
+  <!-- plated collar and central power cell -->
+  <path d="m220 482 25-19h150l26 19-22 91-78 49-78-49-23-91Z" fill="#111d27" stroke="#667c83" stroke-width="5"/>
+  <path d="m251 495 23-12h92l23 12-14 58-55 37-55-37-14-58Z" fill="#1d3038" stroke="#3a6269" stroke-width="4"/>
+  <path d="m320 505 39 22v46l-39 23-39-23v-46l39-22Z" fill="#00e6d1" opacity=".35" filter="url(#smallGlow)"/>
+  <path d="m320 507 35 20v42l-35 21-35-21v-42l35-20Z" fill="#0a1d25" stroke="#58e9dc" stroke-width="3"/>
+  <path d="m320 515 27 16v34l-27 16-27-16v-34l27-16Z" fill="url(#reactor)"/>
+  <path d="m320 525 16 9v20l-16 10-16-10v-20l16-9Z" fill="#dffffb" opacity=".92"/>
+  <path d="M320 534v20m-10-10h20" stroke="#11aeb1" stroke-width="3"/>
+  <!-- swept temple fins and armored helmet -->
+  <path d="m148 187-68 38 47 40-16 62 75-27 23-97-61-16Zm344 0 68 38-47 40 16 62-75-27-23-97 61-16Z" fill="#263945" stroke="#82969c" stroke-width="5" stroke-linejoin="bevel"/>
+  <path d="m144 222-33 5 26 25m359-30 33 5-26 25" fill="none" stroke="#36d8d2" stroke-width="5"/>
+  <path d="m181 164 45-64 94-35 94 35 45 64-15 196-59 82-65 31-65-31-59-82-15-196Z" fill="url(#shell)" stroke="#9bb0b4" stroke-width="6" stroke-linejoin="round"/>
+  <path d="m205 171 39-48 76-27 76 27 39 48-12 172-48 66-55 24-55-24-48-66-12-172Z" fill="url(#face)" stroke="#405760" stroke-width="4"/>
+  <!-- brow armor with asymmetric cuts -->
+  <path d="m190 227 67-37 63 17 63-17 67 37-19 48-111-17-111 17-19-48Z" fill="#14232d" stroke="#60767d" stroke-width="4" stroke-linejoin="bevel"/>
+  <path d="m198 253 92-17 30 8 30-8 92 17-12 28-100-12-100 12-12-28Z" fill="#07141b" stroke="#1a4851" stroke-width="3"/>
+  <!-- one continuous engineered visor, split by a central sensor bridge -->
+  <path d="m190 270 98-18 32 8 32-8 98 18-12 42-98-9-18 18-18-18-102 9-12-42Z" fill="#00e8d2" opacity=".3" filter="url(#smallGlow)"/>
+  <path d="m190 270 98-18 32 8 32-8 98 18-12 42-98-9-18 18-18-18-102 9-12-42Z" fill="#09151c" stroke="#3b6069" stroke-width="3" stroke-linejoin="bevel"/>
+  <path d="m202 275 83-14 25 8-9 17-90 11-9-22Zm236 0-83-14-25 8 9 17 90 11 9-22Z" fill="url(#visor)"/>
+  <path d="m310 265 10 2 10-2-4 30-6 9-6-9-4-30Z" fill="#9cfff0"/>
+  <path d="m213 278 72-12m142 12-72-12" stroke="#fff" stroke-width="3" opacity=".86"/>
+  <!-- cheek plates and vented jaw make the face distinct at small sizes -->
+  <path d="m194 319 90-14 23 24-15 58-56 31-40-44-2-55Zm252 0-90-14-23 24 15 58 56 31 40-44 2-55Z" fill="#1b2b35" stroke="#5c747b" stroke-width="4" stroke-linejoin="bevel"/>
+  <path d="m221 340 52-9-8 34-34 21-12-46Zm198 0-52-9 8 34 34 21 12-46Z" fill="#0b171f" stroke="#2f4d57" stroke-width="3"/>
+  <path d="m276 375 44 12 44-12-13 50-31 20-31-20-13-50Z" fill="#111c25" stroke="#82969b" stroke-width="4" stroke-linejoin="bevel"/>
+  <path d="m294 392 26 7 26-7-8 19-18 12-18-12-8-19Z" fill="#24424a" stroke="#4ccfc8" stroke-width="3"/>
+  <path d="M305 402h7m16 0h7m-30 8h30" stroke="#b9f6e9" stroke-width="3" stroke-linecap="square"/>
+  <!-- layered brow rail, ports, and optic status lights -->
+  <path d="m224 155 26-31 70-24m96 55-26-31-70-24" fill="none" stroke="#a7bec0" stroke-width="4"/>
+  <path d="M244 167h31m90 0h31" stroke="#4ebebc" stroke-width="4"/>
+  <path d="M161 305h24m270 0h24M164 323h18m276 0h18" stroke="#00dfce" stroke-width="4"/>
+  <circle cx="171" cy="293" r="5" fill="#baff77"/><circle cx="469" cy="293" r="5" fill="#baff77"/>
+  <path d="m119 610 44-26m358 26-44-26" stroke="#68e3d7" stroke-width="5"/>
+</svg>

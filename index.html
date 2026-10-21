@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Cybercore F-Droid repository</title>
   <meta name="description" content="Add the Cybercore F-Droid repository: CyberVault, Cybermeta, Holodrive Photos, Nightwatch and SignalWarden with automatic updates. Every APK is the signed GitHub release, re-verified before listing.">
-  <meta name="theme-color" content="#07070d">
-  <link rel="icon" href="repo/icons/icon.png">
+  <meta name="theme-color" content="#080c14">
+  <link rel="icon" href="assets/cyberdroid/favicon-v2.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="assets/cyberdroid/cybercore-fdroid-mark-v2.svg">
+  <link rel="apple-touch-icon" href="assets/cyberdroid/cybercore-fdroid-mark-v2.png">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="repo-ui.css?v=4">
   <link rel="stylesheet" href="boot-system.css">
   <link rel="stylesheet" href="assets/fdroid-react.css?v=8">
+  <link rel="stylesheet" href="repo-ui.css?v=6">
   <script>
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.documentElement.classList.add('boot-pending');
@@ -31,7 +33,7 @@
 <body>
   <aside class="system-boot" id="systemBoot" role="status" aria-live="polite" aria-label="Cybercore system startup">
     <div class="boot-panel">
-      <div class="boot-top"><span class="boot-emblem" aria-hidden="true">CC</span><span>CYBERCORE / REPOSITORY SYSTEM</span><span class="boot-channel">PUBLIC CHANNEL</span></div>
+      <div class="boot-top"><img class="boot-emblem" src="assets/cyberdroid/cybercore-fdroid-mark-v2.svg" alt=""><span>CYBERCORE / REPOSITORY SYSTEM</span><span class="boot-channel">PUBLIC CHANNEL</span></div>
       <div class="boot-core">
         <p class="boot-kicker">INITIALIZING SECURE DISTRIBUTION</p>
         <h1>SYSTEM <em>BOOT</em></h1>
@@ -48,18 +50,19 @@
     </div>
   </aside>
   <header class="site-header">
-    <a class="brand" href="https://cybercoretech.github.io/" data-brand-phase="0" aria-label="Cybercore Tech home"><span class="brand-emblem">CC</span><span class="brand-name">CYBERCORE <b>/</b> F-DROID<small>APP REPOSITORY</small></span></a>
+    <a class="brand" href="https://cybercoretech.github.io/" data-brand-phase="0" aria-label="Cybercore Tech home"><img class="brand-emblem" src="assets/cyberdroid/cybercore-fdroid-mark-v2.svg" alt=""><span class="brand-name">CYBERCORE <b>/</b> F-DROID<small>APP REPOSITORY</small></span></a>
     <nav class="main-nav" aria-label="Primary"><a href="#add">ADD</a><a href="#apps-section">APPS</a><a href="#updates">UPDATES</a><a href="#trust">TRUST</a><a href="#themes">THEMES</a></nav>
     <div class="theme-picker"><span class="theme-label">THEME</span><button id="themeButton" class="theme-button" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="themeMenu">LOADING THEMES…</button><div id="themeMenu" class="theme-menu" role="listbox" aria-label="Theme" data-lenis-prevent hidden></div></div>
   </header>
 
   <main>
     <section class="wrap hero" id="add">
+      <p class="unit-mark"><span>CYBERCORE UNIVERSAL DEFENSE SYSTEM</span><b>SENTINEL / 01</b></p>
       <canvas id="radar" aria-hidden="true"></canvas>
       <div id="mouseTrailMount" aria-hidden="true"></div>
       <div>
         <p class="eyebrow">F-Droid repository · auto-updates · no account · no trackers</p>
-        <h1><span class="glitch" data-text="CYBER">CYBER</span><br><em>DROID</em></h1>
+        <h1 class="cyberdroid-wordmark" aria-label="CyberDroid"><span>CYBER</span><span>DROID</span></h1>
         <p class="tagline">Every Cybercore app, one tap, kept up to date.</p>
         <p class="lede">Add this repository to <a href="https://f-droid.org/">F-Droid</a> (or Droid-ify, Neo Store) and get Cybercore's privacy-first Android apps with automatic updates. Each APK is the <em>exact signed release</em> published on GitHub, re-verified against its developer certificate before it's listed, and the index itself is signed with a key that never touches GitHub.</p>
         <div class="stats" aria-label="Repository statistics">

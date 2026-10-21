@@ -12,7 +12,7 @@
 .boot-pending.boot-leaving .system-boot { opacity: 0; pointer-events: none; }
 .boot-panel { width: min(43rem, 100%); padding: clamp(1.25rem, 4vw, 2.5rem); border: 1px solid var(--a1); background: color-mix(in srgb, var(--panel) 88%, #000); box-shadow: 0 0 3rem color-mix(in srgb, var(--a1) 15%, transparent), inset 0 0 2.5rem #0008; }
 .boot-top, .boot-bottom { display: flex; align-items: center; gap: .75rem; color: var(--a1); font: .64rem/1.4 var(--mono); letter-spacing: .15em; }
-.boot-emblem { display: grid; width: 2rem; aspect-ratio: 1; place-items: center; border: 1px solid var(--a1); border-radius: 50%; box-shadow: 0 0 1rem color-mix(in srgb, var(--a1) 30%, transparent); }
+.boot-emblem { display: block; width: 2.2rem; height: 2.2rem; object-fit: contain; filter: drop-shadow(0 0 .5rem color-mix(in srgb, var(--a1) 32%, transparent)); }
 .boot-channel { margin-left: auto; color: var(--muted); text-align: right; }
 .boot-core { padding: clamp(2.3rem, 8vw, 4.7rem) 0 2rem; text-align: center; }
 .boot-kicker, .boot-subtitle { color: var(--muted); font: .66rem/1.5 var(--mono); letter-spacing: .2em; }

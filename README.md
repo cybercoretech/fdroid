@@ -29,6 +29,12 @@ Deep link to an app's details: `https://cybercoretech.github.io/fdroid/#app=<pac
 - **Signed index.** The repository index is signed with the Cybercore repo key (fingerprint above). The key lives only on the maintainer's machine; it's never in this repo or in GitHub.
 - **Not the main F-Droid catalog.** F-Droid doesn't build these APKs. Main-catalog listings may follow once builds are reproducible.
 
+## 🤖 CyberDroid identity
+
+The landing page features Sentinel 01, a Cybercore Universal Defense cyborg with a compact endoskeleton head, paired optics, articulated mechanics, and lightly battle-worn graphite titanium armor. The wordmark uses clean Orbitron display typography in titanium and cyan; the header keeps its Cybercore / F-Droid lettering while replacing the old `CC` badge with a precision optical-core emblem. The static background leaves clear space for page copy, and repository cards share a quiet graphite-and-cyan treatment.
+
+The complete **SVG / PNG / ICO asset pack** and usage notes are in [`assets/cyberdroid/`](assets/cyberdroid/). The F-Droid client repository icon under `repo/icons/` is kept separate from the site's favicon and branding.
+
 ## 🛠️ Maintaining
 
 Needs `fdroidserver` (`python3 -m venv ~/.local/share/fdroidserver-venv && …/pip install fdroidserver`), `gh`, and the Android build-tools.

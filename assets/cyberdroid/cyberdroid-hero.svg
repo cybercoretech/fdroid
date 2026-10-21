@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1120" role="img" aria-labelledby="title desc">
+  <title id="title">CyberDroid signal-grid background</title>
+  <desc id="desc">A static dark technical field with an original armored CyberDroid guardian, reactor circuits, and repository telemetry.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1920" y2="1120" gradientUnits="userSpaceOnUse"><stop stop-color="#080c14"/><stop offset=".52" stop-color="#0a1119"/><stop offset="1" stop-color="#090b13"/></linearGradient>
+    <linearGradient id="armor" x1="1180" y1="92" x2="1770" y2="1040" gradientUnits="userSpaceOnUse"><stop stop-color="#9fb5b6"/><stop offset=".2" stop-color="#354c57"/><stop offset=".53" stop-color="#172630"/><stop offset=".8" stop-color="#0e1a24"/><stop offset="1" stop-color="#536b72"/></linearGradient>
+    <linearGradient id="visor" x1="1170" y1="414" x2="1740" y2="480" gradientUnits="userSpaceOnUse"><stop stop-color="#29dfd2"/><stop offset=".55" stop-color="#d2ffe8"/><stop offset="1" stop-color="#79c5dd"/></linearGradient>
+    <radialGradient id="core"><stop stop-color="#e5fff3"/><stop offset=".15" stop-color="#9affd5"/><stop offset=".48" stop-color="#00dfcf"/><stop offset="1" stop-color="#00809a" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0v48" fill="none" stroke="#8197a2" stroke-opacity=".09" stroke-width="1"/></pattern>
+    <linearGradient id="fade" x1="0" y1="0" x2="1920" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#070b12" stop-opacity=".05"/><stop offset=".38" stop-color="#070b12" stop-opacity=".18"/><stop offset=".62" stop-color="#070b12" stop-opacity=".08"/><stop offset="1" stop-color="#070b12" stop-opacity=".16"/></linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="23"/></filter>
+    <filter id="smallGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h1920v1120H0z"/><path fill="url(#grid)" d="M0 0h1920v1120H0z"/>
+  <!-- Static device bay and routed board traces -->
+  <g fill="none" stroke-linecap="square">
+    <path d="M0 176h596l106 106h258m-960 596h382l72-72h214M1423 109h304v156m193 604h-189l-75 75v176M1430 1000h-247l-69-69h-168" stroke="#42b8bb" stroke-opacity=".23" stroke-width="2"/>
+    <path d="M75 0v98l104 104h213m884 918V941l91-91h268V680" stroke="#8aba87" stroke-opacity=".16" stroke-width="2"/>
+    <path d="M0 980h222m1698-789h-137l-46 46v142" stroke="#88a7b1" stroke-opacity=".15" stroke-width="2"/>
+    <path d="M90 153h366m-274 656h181m1199-678h-87m206 843h-188" stroke="#54e4d5" stroke-opacity=".38" stroke-width="3"/>
+  </g>
+  <g fill="#b7efc5"><circle cx="456" cy="153" r="4"/><circle cx="365" cy="809" r="4"/><circle cx="1673" cy="331" r="4"/><circle cx="1515" cy="1178" r="4"/></g>
+  <!-- The machine is deliberately asymmetric and armored, with a slit sensor and chest reactor. -->
+  <g transform="translate(1220 90) scale(.68)">
+    <path d="M335 867 381 646l121-109 93-42 22-100h254l22 100 94 42 120 109 47 221H335Z" fill="#00ded0" opacity=".22" filter="url(#glow)"/>
+    <path d="m278 890 36-195 137-104 101-43 20-97h280l20 97 101 43 137 104 37 195H278Z" fill="url(#armor)" stroke="#82989d" stroke-opacity=".7" stroke-width="5"/>
+    <path d="m343 846 30-134 103-70 71-29-13 112-72 24-21 97H343Zm798 0-30-134-103-70-71-29 13 112 72 24 21 97h98Z" fill="#0b151e" stroke="#405760" stroke-width="5"/>
+    <path d="m492 648 97-55 24 10-34 43-64 40m450-38-97-55-24 10 34 43 64 40" fill="none" stroke="#4aa9a7" stroke-width="6"/>
+    <path d="m583 526 38-35h326l39 35-34 117-167 79-167-79-35-117Z" fill="#101b24" stroke="#6e858b" stroke-width="6"/>
+    <path d="m660 538 124-63 124 63v94l-124 73-124-73v-94Z" fill="#0a1c24" stroke="#3d7778" stroke-width="5"/>
+    <circle cx="784" cy="594" r="84" fill="#00e8d0" opacity=".22" filter="url(#glow)"/><path d="m784 514 68 40v80l-68 41-68-41v-80l68-40Z" fill="url(#core)" stroke="#7cf3de" stroke-width="5"/>
+    <path d="m784 543 43 25v52l-43 26-43-26v-52l43-25Z" fill="#b8ffdf" opacity=".9"/><path d="M784 559v70m-35-35h70" stroke="#138c8c" stroke-width="7"/>
+    <!-- distinctive swept cheek armor and angular side fins -->
+    <path d="m438 210-123 57 81 72-27 105 126-46 47-147-104-41Zm692 0 123 57-81 72 27 105-126-46-47-147 104-41Z" fill="#304650" stroke="#82989d" stroke-width="6" stroke-linejoin="bevel"/>
+    <path d="m418 257-67 14 54 47m685-61 67 14-54 47" fill="none" stroke="#48d8d0" stroke-width="6"/>
+    <!-- helmet is a wedge-profile chassis, not a stock round droid head -->
+    <path d="m506 160 78-103 200-61 200 61 78 103-27 327-96 107-155 65-155-65-96-107-27-327Z" fill="url(#armor)" stroke="#a4b4b4" stroke-opacity=".78" stroke-width="7" stroke-linejoin="bevel"/>
+    <path d="m554 174 65-72 165-49 165 49 65 72-22 278-74 86-134 55-134-55-74-86-22-278Z" fill="#111e27" stroke="#536a72" stroke-width="5"/>
+    <path d="m500 270 158-44 126 28 126-28 158 44-31 77-253-30-253 30-31-77Z" fill="#15242d" stroke="#667d83" stroke-width="5" stroke-linejoin="bevel"/>
+    <path d="m527 318 197-36 60 15 60-15 197 36-25 75-198-23-34 28-34-28-198 23-25-75Z" fill="#07141b" stroke="#1e5358" stroke-width="5"/>
+    <path d="m542 326 177-32 39 12-15 43-180 17-21-40Zm568 0-177-32-39 12 15 43 180 17 21-40Z" fill="url(#visor)"/>
+    <path d="m761 306 23 4 23-4-10 66-13 18-13-18-10-66Z" fill="#e3ffdf"/>
+    <path d="m526 424 187-28 45 47-27 112-106 59-77-77-22-113Zm516 0-187-28-45 47 27 112 106 59 77-77 22-113Z" fill="#1a2b35" stroke="#607a80" stroke-width="6" stroke-linejoin="bevel"/>
+    <path d="m589 463 102-18-18 70-61 36-23-88Zm390 0-102-18 18 70 61 36 23-88Z" fill="#0b171f" stroke="#34535d" stroke-width="5"/>
+    <path d="m703 572 81 24 81-24-25 85-56 37-56-37-25-85Z" fill="#111c25" stroke="#899ca0" stroke-width="5" stroke-linejoin="bevel"/>
+    <path d="m737 599 47 12 47-12-15 31-32 22-32-22-15-31Z" fill="#23434a" stroke="#45d8d0" stroke-width="4"/>
+    <path d="M753 613h17m28 0h17m-65 16h65" stroke="#cbf8e8" stroke-width="4"/>
+    <!-- segmented temple rails and restrained status lights -->
+    <path d="m598 157 63-73 123-35m186 108-63-73-123-35" fill="none" stroke="#bdcbca" stroke-opacity=".7" stroke-width="5"/>
+    <path d="M651 174h82m102 0h82m-408 231h47m657 0h48" stroke="#67d5cf" stroke-width="5"/>
+    <circle cx="613" cy="427" r="8" fill="#b4f39b"/><circle cx="955" cy="427" r="8" fill="#b4f39b"/>
+  </g>
+  <!-- etched system labels and reticle marks -->
+  <g fill="#9ec1c4" font-family="monospace" font-size="18" letter-spacing="5" opacity=".48">
+    <text x="1460" y="152">CD-01 / ACTIVE</text><text x="1490" y="1040">SECURE DISTRIBUTION · 05 VERIFIED PACKAGES</text>
+  </g>
+  <g fill="none" stroke="#8cb4b9" stroke-opacity=".42" stroke-width="2"><path d="M86 130h210v44m1490-44h-210v44M87 978h158v-45m1588 45h-158v-45"/><path d="M1750 520h68m-34-34v68M196 520h68m-34-34v68"/></g>
+  <path fill="url(#fade)" d="M0 0h1920v1120H0z"/>
+</svg>

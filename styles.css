@@ -52,7 +52,7 @@ code, pre, kbd { font-family: var(--mono); }
 .brand[data-brand-phase="3"] { --brand-color: var(--orange); --brand-second: var(--pink); }
 .brand[data-brand-phase="4"] { --brand-color: var(--purple); --brand-second: var(--acid); }
 .brand[data-brand-phase="5"] { --brand-color: var(--red); --brand-second: var(--cyan); }
-.brand-emblem { display: grid; place-items: center; width: 2.3rem; height: 2.3rem; clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); background: linear-gradient(135deg, var(--brand-color), var(--brand-second)); color: var(--bg); font-size: .72rem; transition: background .8s; }
+.brand-emblem { display: block; flex: 0 0 2.3rem; width: 2.3rem; height: 2.3rem; object-fit: contain; filter: drop-shadow(0 0 .45rem color-mix(in srgb, var(--cyan) 30%, transparent)); }
 .brand-name b { color: var(--brand-color); transition: color .8s; }
 .brand small { display: block; margin-top: .3rem; color: var(--muted); font: 400 .66rem/1 var(--mono); letter-spacing: .2em; }
 .main-nav { display: flex; gap: 1.3rem; margin-left: auto; font: 600 .74rem/1 var(--display); letter-spacing: .18em; }
@@ -71,10 +71,12 @@ code, pre, kbd { font-family: var(--mono); }
 .theme-button::after { content: " ▾"; color: var(--a1); }
 .theme-button:hover { border-color: var(--a1); box-shadow: var(--glow); }
 .theme-menu {
-  position: absolute; right: 0; top: calc(100% + .5rem); width: min(22rem, 90vw); max-height: min(70vh, 34rem); overflow: auto;
+  position: absolute; z-index: 100; right: 0; top: calc(100% + .5rem); width: min(22rem, 90vw); max-height: min(70vh, 34rem); overflow: auto;
   padding: .4rem; background: color-mix(in srgb, var(--panel) 96%, #000); border: 1px solid var(--line);
   box-shadow: 0 1.5rem 4rem #000a, var(--glow); scrollbar-color: var(--line) transparent; overscroll-behavior: contain; touch-action: pan-y;
 }
+.theme-menu[hidden] { display: none; }
+.theme-menu:not([hidden]) { display: block; }
 .theme-group-label { position: sticky; top: -.4rem; padding: .7rem .7rem .4rem; background: inherit; color: var(--a2); font: 700 .64rem/1 var(--display); letter-spacing: .2em; border-bottom: 1px solid var(--line); }
 .theme-option { display: block; width: 100%; padding: .45rem .7rem; text-align: left; cursor: pointer; background: none; border: 0; color: var(--white); font: .78rem/1.3 var(--mono); letter-spacing: .06em; }
 .theme-option:hover, .theme-option:focus-visible { background: color-mix(in srgb, var(--a1) 14%, transparent); color: var(--a1); outline: none; }
@@ -96,12 +98,9 @@ h2 em, h1 em { font-style: normal; color: transparent; background: linear-gradie
 
 /* ---------- hero ---------- */
 .hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; min-height: min(calc(100vh - 4rem), 52rem); padding: 3rem 0 2rem; }
-.hero h1 { font-size: clamp(3rem, 8.5vw, 6.6rem); font-weight: 900; letter-spacing: .01em; text-shadow: 0 0 2.5rem color-mix(in srgb, var(--a1) 25%, transparent); }
-.hero h1 .glitch { position: relative; display: inline-block; }
-.hero h1 .glitch::before, .hero h1 .glitch::after { content: attr(data-text); position: absolute; inset: 0; pointer-events: none; }
-.hero h1 .glitch::before { color: var(--a2); clip-path: inset(0 0 62% 0); transform: translate(-2px, -1px); opacity: .8; animation: glitch 3.6s infinite steps(1); }
-.hero h1 .glitch::after { color: var(--a1); clip-path: inset(58% 0 0 0); transform: translate(2px, 1px); opacity: .8; animation: glitch 2.9s infinite reverse steps(1); }
-@keyframes glitch { 0%, 92%, 100% { transform: none; } 93% { transform: translate(-4px, 1px); } 95% { transform: translate(3px, -2px); } 97% { transform: translate(-1px, 2px); } }
+.hero h1 { margin: 1.35rem 0 .45rem; font-size: clamp(3rem, 8.5vw, 6.6rem); font-weight: 900; letter-spacing: .01em; }
+.hero h1.cyberdroid-wordmark { width: min(100%, 43rem); margin: 1.35rem 0 .45rem; line-height: 0; }
+.cyberdroid-wordmark img { display: block; width: 100%; height: auto; }
 .hero .tagline { margin: 1.4rem 0 0; font: 600 clamp(1.1rem, 2.2vw, 1.45rem)/1.35 var(--sans); color: var(--white); max-width: 34rem; }
 .hero .lede { margin: 1.1rem 0 0; color: var(--muted); max-width: 34rem; }
 .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.6rem; }
