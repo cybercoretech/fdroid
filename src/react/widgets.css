@@ -11,13 +11,18 @@
 .widget-code { display: block; min-width: 0; margin: .35rem 0 .45rem; color: var(--text, var(--white)); font: .75rem/1.5 var(--mono); overflow-wrap: anywhere; }
 .widget-status-placeholder { display: none; }
 #mouseTrailMount { display: none !important; }
-.stat { overflow: visible; z-index: 2; }
-.stat-info-mount { position: absolute; top: .45rem; right: .45rem; z-index: 5; }
+.stat { position: relative; overflow: visible; z-index: 2; cursor: pointer; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+.stat:hover { border-color: color-mix(in srgb, var(--a1) 65%, var(--line)); box-shadow: 0 0 1.25rem color-mix(in srgb, var(--a1) 16%, transparent); transform: translateY(-2px); }
+.stat-info-mount { position: absolute; inset: 0; z-index: 5; }
 .stat:has(.stat-info[open]) { z-index: 12; }
-.stat-info summary { display: grid; place-items: center; width: 1.25rem; height: 1.25rem; border: 1px solid var(--line); border-radius: 50%; color: var(--muted); font: .72rem/1 var(--mono); cursor: pointer; list-style: none; }
+.stat-info { display: block; }
+.stat-info summary { position: absolute; inset: 0; display: block; width: auto; height: auto; border: 0; border-radius: 0; color: transparent; background: transparent; cursor: pointer; list-style: none; }
+.stat-info-icon { position: absolute; top: .45rem; right: .45rem; display: grid; place-items: center; width: 1.25rem; height: 1.25rem; border: 1px solid var(--line); border-radius: 50%; color: var(--muted); background: color-mix(in srgb, var(--panel) 92%, transparent); font: .72rem/1 var(--mono); transition: color .18s ease, border-color .18s ease, box-shadow .18s ease; }
 .stat-info summary::-webkit-details-marker { display: none; }
-.stat-info[open] summary, .stat-info summary:hover, .stat-info summary:focus-visible { color: var(--a1); border-color: var(--a1); outline: none; }
-.stat-popover { position: absolute; top: 1.65rem; right: -.45rem; width: min(19rem, calc(100vw - 2.5rem)); max-height: min(24rem, 65vh); overflow: auto; padding: .9rem; border: 1px solid var(--a1); background: color-mix(in srgb, var(--bg) 97%, black); box-shadow: 0 .8rem 2.5rem #000b, 0 0 1.3rem color-mix(in srgb, var(--a1) 15%, transparent); color: var(--text, var(--white)); font: .76rem/1.55 var(--sans); }
+.stat-info summary:hover .stat-info-icon, .stat-info summary:focus-visible .stat-info-icon, .stat-info[open] .stat-info-icon { color: var(--a1); border-color: var(--a1); box-shadow: 0 0 .8rem color-mix(in srgb, var(--a1) 30%, transparent); }
+.stat-info summary:focus-visible { outline: 2px solid var(--a1); outline-offset: -3px; }
+.stat-info[open] .stat-info-icon { color: var(--a2); border-color: var(--a2); }
+.stat-popover { position: absolute; z-index: 8; top: calc(100% + .5rem); right: 0; width: min(19rem, calc(100vw - 2.5rem)); max-height: min(24rem, 65vh); overflow: auto; padding: .9rem; border: 1px solid var(--a1); background: color-mix(in srgb, var(--bg) 97%, black); box-shadow: 0 .8rem 2.5rem #000b, 0 0 1.3rem color-mix(in srgb, var(--a1) 15%, transparent); color: var(--text, var(--white)); font: .76rem/1.55 var(--sans); }
 .stat-popover > b { display: block; color: var(--a1); font: .68rem/1.4 var(--mono); letter-spacing: .08em; text-shadow: none; text-transform: uppercase; }
 .stat-popover p { margin: .5rem 0; color: var(--muted); }
 .stat-popover a { color: var(--a1); }
@@ -26,6 +31,7 @@
 .stat-size-list { list-style: none; padding: 0; margin: .5rem 0 0; }
 .stat-size-list li { display: flex; justify-content: space-between; gap: .8rem; border-top: 1px solid var(--line); padding-top: .3rem; }
 .stat-size-list li span { color: var(--muted); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .stat { transition: none; } .stat:hover { transform: none; } }
 
 /* Repository state follows the same-origin index fetch used by the app list. */
 .repo-status { display: grid; grid-template-columns: .7rem minmax(0, 1fr) auto; gap: .7rem; align-items: center; padding: .7rem .8rem; border: 1px solid var(--line); background: color-mix(in srgb, var(--panel) 82%, transparent); font-family: var(--mono); }

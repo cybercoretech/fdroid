@@ -69,7 +69,7 @@ function StatInfo({ kind }) {
   };
   const content = items[kind];
   if (!content) return null;
-  return <details className="stat-info"><summary aria-label={`More information: ${content.title}`} title={`More information: ${content.title}`}>i</summary><div className="stat-popover"><b>{content.title}</b><p>{content.body}</p>{content.links}</div></details>;
+  return <details className="stat-info"><summary aria-label={`Show details: ${content.title}`} title={`Open ${content.title}`}><span className="stat-info-icon" aria-hidden="true">i</span></summary><div className="stat-popover"><b>{content.title}</b><p>{content.body}</p>{content.links}</div></details>;
 }
 
 function SetupAssistant() {
