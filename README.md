@@ -19,6 +19,7 @@ Works with [F-Droid](https://f-droid.org/), Droid-ify and Neo Store.
 | 🖼️ **Cybermeta**: see and strip photo metadata | `dev.cybercore.cybermeta` | MIT | [cybermeta-android-app](https://github.com/cybercoretech/cybermeta-android-app) |
 | 🧊 **Holodrive Photos**: client for your self-hosted Holodrive | `dev.cybercore.holodrive.photos` | Apache-2.0 | [holodrive-android-app](https://github.com/cybercoretech/holodrive-android-app) |
 | 🌙 **Nightwatch**: watch and control your self-hosted services | `dev.cybercore.nightwatch` | MIT | [nightwatch-android-app](https://github.com/cybercoretech/nightwatch-android-app) |
+| 🛰️ **SignalWarden**: private network diagnostics | `dev.cybercore.signalwarden` | Apache-2.0 | [signalwarden](https://github.com/cybercoretech/signalwarden) |
 
 Deep link to an app's details: `https://cybercoretech.github.io/fdroid/#app=<package>`.
 
