@@ -142,6 +142,25 @@ h2 em, h1 em { font-style: normal; color: transparent; background: linear-gradie
 .c-cyan { --card-accent: var(--cyan); } .c-pink { --card-accent: var(--pink); } .c-acid { --card-accent: var(--acid); }
 .c-orange { --card-accent: var(--orange); } .c-purple { --card-accent: var(--purple); } .c-red { --card-accent: var(--red); }
 
+/* Featured CyberSSH project card, using the selected Blacksite Console mark. */
+.cyberssh-spotlight { position: relative; isolation: isolate; display: grid; grid-template-columns: 106px minmax(0,1fr) minmax(190px,auto); gap: 1.4rem; align-items: center; margin-block: 0 2rem; padding: 1.35rem 1.5rem; border: 1px solid var(--line); background: linear-gradient(105deg,color-mix(in srgb,var(--cyan) 7%,transparent),transparent 42%),color-mix(in srgb,var(--panel) 92%,transparent); box-shadow: 0 1.2rem 3rem #0005; overflow: hidden; }
+.cyberssh-spotlight::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 2px; background: linear-gradient(transparent,var(--cyan),var(--a2),transparent); box-shadow: 0 0 1rem color-mix(in srgb,var(--cyan) 45%,transparent); }
+.cyberssh-mark { display: grid; place-items: center; width: 96px; height: 96px; border: 1px solid var(--line); background: radial-gradient(circle,color-mix(in srgb,var(--cyan) 13%,transparent),transparent 70%),var(--bg); }
+.cyberssh-mark img { display: block; width: 74px; height: 74px; object-fit: contain; filter: drop-shadow(0 0 .8rem color-mix(in srgb,var(--cyan) 25%,transparent)); }
+.cyberssh-copy .eyebrow { margin-bottom: .55rem; font-size: .62rem; }
+.cyberssh-copy h2 { font-size: clamp(1.65rem,3vw,2.25rem); }
+.cyberssh-copy h2 span { margin-left: .4rem; color: var(--a1); font: 500 .62rem/1 var(--mono); letter-spacing: .08em; vertical-align: middle; }
+.cyberssh-copy>p:last-of-type { max-width: 48rem; margin: .5rem 0 0; color: var(--muted); font-size: .92rem; }
+.cyberssh-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .7rem; }
+.cyberssh-tags span { padding: .25rem .45rem; border: 1px solid var(--line); color: var(--muted); font: .62rem/1 var(--mono); letter-spacing: .08em; }
+.cyberssh-actions { display: flex; flex-direction: column; align-items: flex-start; gap: .55rem; }
+.cyberssh-status { color: var(--muted); font: .58rem/1.45 var(--mono); letter-spacing: .07em; }
+.cyberssh-status i { display: inline-block; width: 6px; height: 6px; margin-right: .25rem; border-radius: 50%; background: var(--a2); box-shadow: 0 0 .5rem var(--a2); }
+.cyberssh-actions .btn { padding: .75rem .9rem; font-size: .68rem; }
+.cyberssh-source { color: var(--a1); font: .65rem/1.3 var(--mono); letter-spacing: .1em; }
+@media (max-width: 960px) { .cyberssh-spotlight { grid-template-columns: 84px minmax(0,1fr); gap: 1rem; } .cyberssh-mark { width: 78px; height: 78px; } .cyberssh-mark img { width: 62px; height: 62px; } .cyberssh-actions { grid-column: 2; flex-direction: row; flex-wrap: wrap; align-items: center; gap: .8rem; } }
+@media (max-width: 620px) { .cyberssh-spotlight { grid-template-columns: 1fr; padding: 1.1rem; } .cyberssh-mark { width: 66px; height: 66px; } .cyberssh-mark img { width: 54px; height: 54px; } .cyberssh-actions { grid-column: auto; align-items: flex-start; flex-direction: column; } .cyberssh-copy h2 span { display: block; margin: .35rem 0 0; } }
+
 /* ---------- pipeline ---------- */
 .pipeline { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; counter-reset: step; }
 .step { position: relative; padding: 1.4rem 1.2rem; border: 1px solid var(--line); border-left: 0; background: color-mix(in srgb, var(--panel) 75%, transparent); }

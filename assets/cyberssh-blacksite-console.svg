@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">CyberSSH — Blacksite Console</title>
+  <desc id="desc">A rugged titanium terminal hatch with cyan corner signals and a lime command cursor.</desc>
+  <g fill="none" stroke-linecap="square" stroke-linejoin="bevel">
+    <path d="M27 18h19M18 27v19m83-19v19M82 18h19v19M18 82v19h19m64-19v19H82" stroke="#52616d" stroke-width="2"/>
+    <path d="M33 34h61v48l-8 8H33z" fill="#111923" stroke="#778792" stroke-width="2.4"/>
+    <path d="M36 37h55v10H36z" fill="#202b34" stroke="none"/>
+    <path d="M36 37h22l-3 3H36zm55 38v7l-8 8h-3z" fill="#28dce8" stroke="none"/>
+    <path d="M36 50h55M40 84h44" stroke="#35434d" stroke-width="1.5"/>
+    <path d="m48 55 10 8-10 8m15-3h16" stroke="#d7e1e8" stroke-width="4"/>
+    <path d="M63 68h16v5H63z" fill="#9aff6a" stroke="none"/>
+    <path d="M82 42a2 2 0 1 0 4 0 2 2 0 0 0-4 0" fill="#9aff6a" stroke="none"/>
+    <path d="M24 24h5m-5 0v5m80 75h-5m5 0v-5" stroke="#28dce8" stroke-width="1.6"/>
+    <path d="M39 31a1.8 1.8 0 1 0 3.6 0 1.8 1.8 0 0 0-3.6 0m45 63a1.8 1.8 0 1 0 3.6 0 1.8 1.8 0 0 0-3.6 0" fill="#52616d" stroke="none"/>
+  </g>
+</svg>
