@@ -219,7 +219,23 @@
       const term = q.value.trim().toLowerCase();
       const shown = pkgs.filter((x) => (filter === 'All' || x.cats.includes(filter)) &&
         (!term || `${en(x.m.name)} ${en(x.m.summary)} ${x.id}`.toLowerCase().includes(term)));
-      grid.replaceChildren(...(shown.length ? shown.map((x, i) => {
+      const spotlightMatches = (!term || 'cyberssh blacksite console android ssh remote shell host key verification'.includes(term)) &&
+        (filter === 'All' || filter === 'Security' || filter === 'System');
+      const spotlight = spotlightMatches ? (() => {
+        const card = el('a', { className: 'app cyberssh-directory-card in', href: 'https://cybercoretech.github.io/CyberSSH/', ariaLabel: 'CyberSSH project spotlight, not in the repository index' },
+          el('div', { className: 'app-head' },
+            el('div', { className: 'app-icon' }, el('img', { src: 'assets/cyberssh-blacksite-console.svg', alt: '', width: 68, height: 68 })),
+            el('div', {}, el('h3', { textContent: 'CYBERSSH' }), el('p', { className: 'sum', textContent: 'Blacksite Console · Android SSH with host-key review and an operator-controlled remote shell.' }))),
+          el('div', { className: 'badges' },
+            el('span', { className: 'badge ver', textContent: 'PROJECT SPOTLIGHT' }),
+            el('span', { className: 'badge', textContent: 'ANDROID' }),
+            el('span', { className: 'badge', textContent: 'OPEN SOURCE' })),
+          el('div', { className: 'app-foot' },
+            el('span', { className: 'cyberssh-index-status', textContent: 'NOT IN F-DROID INDEX' }),
+            el('span', { textContent: 'OPEN PROJECT ↗' })));
+        return card;
+      })() : null;
+      const appCards = shown.map((x, i) => {
         const perms = permsOf(x.v), af = x.v.antiFeatures || {};
         const card = el('button', { className: 'app', type: 'button', ariaLabel: `${en(x.m.name)}: details` },
           el('div', { className: 'app-head' },
@@ -238,7 +254,10 @@
         card.style.transitionDelay = reduced ? '0s' : `${i * 70}ms`;
         tilt(card); io ? io.observe(card) : card.classList.add('in');
         return card;
-      }) : [el('p', { className: 'empty', textContent: 'NO APPS MATCH THAT FILTER.' })]));
+      });
+      const cards = [...(spotlight ? [spotlight] : []), ...appCards];
+      grid.replaceChildren(...(cards.length ? cards : [el('p', { className: 'empty', textContent: 'NO APPS MATCH THAT FILTER.' })]));
+      if (spotlight) tilt(spotlight);
       // Re-filtering happens on screen: show the new cards right away.
       if (drawn) grid.querySelectorAll('.app').forEach((c) => { c.style.transitionDelay = '0s'; c.classList.add('in'); });
       drawn = true;

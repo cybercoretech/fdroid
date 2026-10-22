@@ -143,7 +143,8 @@ h2 em, h1 em { font-style: normal; color: transparent; background: linear-gradie
 .c-orange { --card-accent: var(--orange); } .c-purple { --card-accent: var(--purple); } .c-red { --card-accent: var(--red); }
 
 /* Featured CyberSSH project card, using the selected Blacksite Console mark. */
-.cyberssh-spotlight { position: relative; isolation: isolate; display: grid; grid-template-columns: 106px minmax(0,1fr) minmax(190px,auto); gap: 1.4rem; align-items: center; margin-block: 0 2rem; padding: 1.35rem 1.5rem; border: 1px solid var(--line); background: linear-gradient(105deg,color-mix(in srgb,var(--cyan) 7%,transparent),transparent 42%),color-mix(in srgb,var(--panel) 92%,transparent); box-shadow: 0 1.2rem 3rem #0005; overflow: hidden; }
+.apps-directory { padding-top: 2rem; }
+.cyberssh-spotlight { position: relative; isolation: isolate; display: grid; grid-template-columns: 106px minmax(0,1fr) minmax(190px,auto); gap: 1.4rem; align-items: center; margin-block: 0 4rem; padding: 1.35rem 1.5rem; border: 1px solid var(--line); background: linear-gradient(105deg,color-mix(in srgb,var(--cyan) 7%,transparent),transparent 42%),color-mix(in srgb,var(--panel) 92%,transparent); box-shadow: 0 1.2rem 3rem #0005; overflow: hidden; }
 .cyberssh-spotlight::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 2px; background: linear-gradient(transparent,var(--cyan),var(--a2),transparent); box-shadow: 0 0 1rem color-mix(in srgb,var(--cyan) 45%,transparent); }
 .cyberssh-mark { display: grid; place-items: center; width: 96px; height: 96px; border: 1px solid var(--line); background: radial-gradient(circle,color-mix(in srgb,var(--cyan) 13%,transparent),transparent 70%),var(--bg); }
 .cyberssh-mark img { display: block; width: 74px; height: 74px; object-fit: contain; filter: drop-shadow(0 0 .8rem color-mix(in srgb,var(--cyan) 25%,transparent)); }

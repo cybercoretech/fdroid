@@ -9,10 +9,10 @@
   <link rel="icon" href="assets/cyberdroid/favicon-v2.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="assets/cyberdroid/cybercore-fdroid-mark-v2.svg">
   <link rel="apple-touch-icon" href="assets/cyberdroid/cybercore-fdroid-mark-v2.png">
-  <link rel="stylesheet" href="styles.css?v=cyberssh-spotlight-1">
+  <link rel="stylesheet" href="styles.css?v=cyberssh-placement-2">
   <link rel="stylesheet" href="boot-system.css">
   <link rel="stylesheet" href="assets/fdroid-react.css?v=8">
-  <link rel="stylesheet" href="repo-ui.css?v=6">
+  <link rel="stylesheet" href="repo-ui.css?v=8">
   <script>
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.documentElement.classList.add('boot-pending');
@@ -91,7 +91,8 @@
       </div>
     </section>
 
-    <section class="wrap cyberssh-spotlight c-cyan" id="cyberssh" aria-labelledby="cyberssh-title">
+    <section class="wrap section apps-directory" id="apps-section">
+      <div class="cyberssh-spotlight c-cyan" id="cyberssh" aria-labelledby="cyberssh-title">
       <a class="cyberssh-mark" href="https://cybercoretech.github.io/CyberSSH/" aria-label="Open the CyberSSH project site">
         <img src="assets/cyberssh-blacksite-console.svg" alt="CyberSSH Blacksite Console logo" width="96" height="96">
       </a>
@@ -106,9 +107,7 @@
         <a class="btn" href="https://cybercoretech.github.io/CyberSSH/">OPEN PROJECT SITE ↗</a>
         <a class="cyberssh-source" href="https://github.com/cybercoretech/CyberSSH">SOURCE REPOSITORY ↗</a>
       </div>
-    </section>
-
-    <section class="wrap section" id="apps-section">
+      </div>
       <div class="section-head reveal"><div><p class="eyebrow">01 / In the repository</p><h2><span id="appsTitle">Our apps,</span><br><em>zero trackers.</em></h2></div><p>Kotlin + Compose on the outside, shared Rust cores where it counts. No ads, no analytics, no accounts. Tap any app for its permissions, screenshots, signer and checksums. This list is built live from the signed repository index.</p></div>
       <div class="toolbar"><input id="appSearch" type="search" placeholder="Search apps…" aria-label="Search apps"><div id="appFilters" class="copy-row" style="margin:0" role="group" aria-label="Filter by category"></div></div>
       <div class="apps" id="apps" aria-live="polite">
@@ -168,7 +167,7 @@
 
   <script src="overlay-scroll-lock.js?v=1"></script>
   <script src="app.js?v=2"></script>
-  <script src="repo-ui.js?v=3"></script>
+  <script src="repo-ui.js?v=4"></script>
   <script defer src="assets/fdroid-react.js?v=8"></script>
   <script defer src="vendor/anime.umd.min.js"></script>
   <script type="module" src="boot-system.js?v=3"></script>

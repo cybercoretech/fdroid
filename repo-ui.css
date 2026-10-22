@@ -4,7 +4,7 @@ body { background: radial-gradient(54rem 40rem at 84% 30%, #16323a55, transparen
 body::before { opacity: .28; background-size: 56px 56px; mask-image: radial-gradient(ellipse at 70% 18%, #000 0%, transparent 78%); }
 body::after { opacity: .025; }
 .hero { position: relative; align-items: start; isolation: isolate; }
-.hero::before { content:""; position:absolute; z-index:0; inset:-1.5rem calc((100vw - 100%)/-2) 0; pointer-events:none; background:linear-gradient(90deg,#080b11 0%,#080b1140 43%,#080b116b 100%),url("assets/cyberdroid/cyberdroid-hero-v2.webp") center/cover no-repeat; opacity:.78; mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 100%); }
+.hero::before { content:""; position:absolute; z-index:0; inset:-1.5rem calc((100vw - 100%)/-2) 0; pointer-events:none; background:linear-gradient(90deg,#080b11 0%,#080b1140 43%,#080b116b 100%),url("assets/cyberdroid/cyberdroid-hero-v2.webp") center center/cover no-repeat; background-attachment:scroll; opacity:.78; mask-image:linear-gradient(90deg,transparent 0%,#000 12%,#000 100%); }
 .hero > * { min-width: 0; position: relative; z-index: 1; }
 .unit-mark { position: absolute !important; top: .1rem; right: 0; z-index: 2 !important; display: flex; align-items: center; gap: .75rem; margin: 0; padding: .35rem .55rem; border-bottom: 1px solid #314750; color: #a8c5ca; background: #080d14a8; font: .56rem/1.2 var(--mono); letter-spacing: .13em; }
 .unit-mark b { color: #59d8d4; font-weight: 400; }
@@ -75,6 +75,11 @@ pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
 .badge.self { color: var(--a2); border-color: color-mix(in srgb, var(--a2) 45%, var(--line)); }
 .app-foot { display: flex; justify-content: space-between; gap: .6rem; font: .68rem/1.4 var(--mono); color: var(--muted); letter-spacing: .1em; border-top: 1px dashed var(--line); padding-top: .7rem; }
 .app-foot b { color: var(--a3); font-weight: 400; }
+.cyberssh-directory-card { --a1: var(--cyan); --a2: var(--pink); text-decoration: none; border-color: color-mix(in srgb,var(--cyan) 38%,var(--line)); background: linear-gradient(135deg,color-mix(in srgb,var(--cyan) 7%,transparent),transparent 52%),color-mix(in srgb,var(--panel) 94%,transparent); }
+.cyberssh-directory-card::after { background: linear-gradient(90deg,var(--cyan),var(--pink)); transform: scaleX(.42); }
+.cyberssh-directory-card:hover { text-decoration: none; border-color: color-mix(in srgb,var(--cyan) 65%,var(--line)); }
+.cyberssh-directory-card .app-icon img { object-fit: contain; padding: .25rem; background: #080b10; }
+.cyberssh-directory-card .cyberssh-index-status { color: var(--pink); }
 .empty { padding: 2rem; border: 1px dashed var(--line); color: var(--muted); font-family: var(--mono); text-align: center; }
 
 /* ---- detail dialog ------------------------------------------------------ */
