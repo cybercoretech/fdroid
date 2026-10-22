@@ -130,6 +130,29 @@
 
   // ---- detail dialog -------------------------------------------------------
   const dlg = $('#appDialog');
+  const openCyberSSH = () => {
+    const link = (href, text, cls = 'btn ghost') => el('a', { className: cls, href, target: '_blank', rel: 'noopener', textContent: text });
+    dlg.replaceChildren(el('div', { className: 'dlg' },
+      el('div', { className: 'dlg-head' },
+        el('img', { src: 'assets/cyberssh-blacksite-console.svg', alt: 'CyberSSH Blacksite Console logo', width: 92, height: 92 }),
+        el('div', {}, el('h2', { textContent: 'CyberSSH' }), el('p', { className: 'sum', textContent: '06 / Blacksite Console · Android SSH client' })),
+        el('button', { className: 'chip-btn dlg-close', type: 'button', textContent: 'CLOSE ✕', onclick: () => dlg.close() })),
+      el('div', { className: 'badges' },
+        el('span', { className: 'badge ver', textContent: 'PROJECT SPOTLIGHT' }),
+        el('span', { className: 'badge', textContent: 'ANDROID' }),
+        el('span', { className: 'badge', textContent: 'OPEN SOURCE' }),
+        el('span', { className: 'badge offline', textContent: 'NOT IN F-DROID INDEX' })),
+      desc('A focused Android SSH client with server fingerprint verification and an operator-controlled remote shell.\n\nReview a server’s host key before connecting, manage SSH identities, and work in a mobile terminal built for deliberate remote operations.\n\nCyberSSH is featured here as a Cybercore project. It is not currently distributed through this F-Droid repository.'),
+      el('div', { className: 'facts' },
+        el('div', { className: 'fact' }, el('span', { textContent: 'PROJECT' }), el('code', { textContent: 'Cybercore / Android Operations' })),
+        el('div', { className: 'fact' }, el('span', { textContent: 'SECURITY FOCUS' }), el('code', { textContent: 'SSH host-key verification' })),
+        el('div', { className: 'fact' }, el('span', { textContent: 'DISTRIBUTION' }), el('code', { textContent: 'Project page · not in this F-Droid index' }))),
+      el('div', { className: 'dlg-actions' },
+        link('https://cybercoretech.github.io/CyberSSH/', 'OPEN PROJECT SITE ↗', 'btn'),
+        link('https://github.com/cybercoretech/CyberSSH', 'SOURCE REPOSITORY ↗'))));
+    dlg.showModal();
+    window.cybercorePageScrollLock?.lock('app-details');
+  };
   const openApp = (id, p) => {
     const m = p.metadata, v = Object.values(p.versions).sort((a, b) => b.manifest.versionCode - a.manifest.versionCode)[0];
     const perms = permsOf(v), af = v.antiFeatures || {};
@@ -166,7 +189,7 @@
   dlg?.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
   dlg?.addEventListener('close', () => {
     window.cybercorePageScrollLock?.unlock('app-details');
-    if (location.hash.startsWith('#app=')) history.replaceState(null, '', location.pathname + location.search);
+    if (location.hash.startsWith('#app=') || location.hash.startsWith('#project=')) history.replaceState(null, '', location.pathname + location.search);
   });
 
   // ---- render --------------------------------------------------------------
@@ -222,7 +245,7 @@
       const spotlightMatches = (!term || 'cyberssh blacksite console android ssh remote shell host key verification'.includes(term)) &&
         (filter === 'All' || filter === 'Security' || filter === 'System');
       const spotlight = spotlightMatches ? (() => {
-        const card = el('a', { className: 'app cyberssh-directory-card in', href: 'https://cybercoretech.github.io/CyberSSH/', ariaLabel: 'CyberSSH project spotlight, not in the repository index' },
+        const card = el('button', { className: 'app cyberssh-directory-card in', type: 'button', ariaLabel: 'CyberSSH: project details' },
           el('div', { className: 'app-head' },
             el('div', { className: 'app-icon' }, el('img', { src: 'assets/cyberssh-blacksite-console.svg', alt: '', width: 68, height: 68 })),
             el('div', {}, el('h3', { textContent: 'CYBERSSH' }), el('p', { className: 'sum', textContent: 'Blacksite Console · Android SSH with host-key review and an operator-controlled remote shell.' }))),
@@ -232,7 +255,8 @@
             el('span', { className: 'badge', textContent: 'OPEN SOURCE' })),
           el('div', { className: 'app-foot' },
             el('span', { className: 'cyberssh-index-status', textContent: 'NOT IN F-DROID INDEX' }),
-            el('span', { textContent: 'OPEN PROJECT ↗' })));
+            el('span', { textContent: 'VIEW DETAILS ↗' })));
+        card.addEventListener('click', () => { history.replaceState(null, '', '#project=cyberssh'); openCyberSSH(); });
         return card;
       })() : null;
       const appCards = shown.map((x, i) => {
@@ -273,7 +297,10 @@
       el('b', { textContent: `${e.name} ${e.v.manifest.versionName}` }),
       el('span', { className: 'sum', textContent: `${mb(e.v.file.size)} MB · versionCode ${e.v.manifest.versionCode}` }))));
     // Deep links: #app=<package id> opens that app's details.
-    const deep = () => { const id = decodeURIComponent((location.hash.match(/^#app=(.+)$/) || [])[1] || ''); const x = pkgs.find((k) => k.id === id); if (x) openApp(x.id, x.p); };
+    const deep = () => {
+      if (location.hash === '#project=cyberssh') { openCyberSSH(); return; }
+      const id = decodeURIComponent((location.hash.match(/^#app=(.+)$/) || [])[1] || ''); const x = pkgs.find((k) => k.id === id); if (x) openApp(x.id, x.p);
+    };
     addEventListener('hashchange', deep); deep();
     const ts = index.repo.timestamp;
     if (ts) $('#indexStamp').textContent = new Date(ts).toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
