@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "prebuild": "scripts/generate_fdroid_data.sh",
     "build:react": "vite build",
     "check": "npm run build:react"
   },
