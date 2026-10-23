@@ -1,6 +1,6 @@
 # github-repo	release-asset	application-id	developer signing cert (SHA-256)
 cybervault-android-app	cybervault.apk	dev.cybercore.cybervault	9dfa3699b793ad16af999b2fbe99b4b13ee26f8014705cc661521ee2b15e52cb
-cybermeta-android-app	cybermeta.apk	dev.cybercore.cybermeta	88390595f5fbf171dc03d040abc8edc2a7fb9e973320b3c4bbe725d4139b283c
+cybermeta-android-app	cybermeta.apk	dev.cybercore.cybermeta	a496b5c0bcfc188de2363e28a2c4055de824198cb4ae79856b6962523ed031b1
 holodrive-android-app	holodrive-photos.apk	dev.cybercore.holodrive.photos	02e0bbab51e85a39db95577bb682f52380001a50fcf64013af5b32efa6178e6e
 nightwatch-android-app	nightwatch.apk	dev.cybercore.nightwatch	be90ca53b53c48c52a5a75a5d60191a8dd6e08219ff6074c7ce36d6db961b700
 signalwarden	signalwarden.apk	dev.cybercore.signalwarden	c8a7418085ee06271f46768ce2356e80834d1d85309f3d58cd8113f4f29679c6
