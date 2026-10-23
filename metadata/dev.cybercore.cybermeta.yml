@@ -19,3 +19,8 @@ Description: |-
   * Clean modes: share-safe, location only, anonymous camera, pixels only, shift dates
   * Share straight from your gallery to "Clean with Cybermeta"
   * No internet permission
+Version: 0.2.0
+VersionCode: 101
+APKName: cybermeta.apk
+SHA256: a496b5c0bcfc188de2363e28a2c4055de824198cb4ae79856b6962523ed031b1
+SigningCert: E3:62:33:B1:91:CB:22:B1:7A:81:A6:23:CB:EF:71:FD:02:E8:D2:C2:B2:3E:C0:B7:71:C1:1E:14:C3:5F:27:FB
