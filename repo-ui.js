@@ -193,6 +193,7 @@
         link(`${REPO}${v.file.name}`, 'DOWNLOAD APK ↓', 'btn'),
         link(m.sourceCode, 'SOURCE ↗'), m.webSite !== m.sourceCode ? link(m.webSite, 'SITE ↗') : null,
         id === 'dev.cybercore.cybermeta' ? link('https://cybercoretech.github.io/cybermeta/', 'DESKTOP CLI ↗') : null,
+        id === 'dev.cybercore.cyberterm' ? link('https://cybercoretech.github.io/cyberterm/', 'DESKTOP TERMINAL ↗') : null,
         link(m.changelog, 'RELEASES ↗'))));
     dlg.showModal();
     window.cybercorePageScrollLock?.lock('app-details');

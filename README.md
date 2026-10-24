@@ -17,6 +17,7 @@ Works with [F-Droid](https://f-droid.org/), Droid-ify and Neo Store.
 |---|---|---|---|
 | 🔐 **CyberVault**: offline password vault with Keysmith | `dev.cybercore.cybervault` | MIT | [cybervault-android-app](https://github.com/cybercoretech/cybervault-android-app) |
 | 🖼️ **Cybermeta**: see and strip photo metadata | `dev.cybercore.cybermeta` | MIT | [Android app](https://cybercoretech.github.io/cybermeta-android-app/) · [CLI](https://cybercoretech.github.io/cybermeta/) · [Android source](https://github.com/cybercoretech/cybermeta-android-app) · [CLI source](https://github.com/cybercoretech/cybermeta) |
+| 🖥️ **Cyberterm**: a GPU terminal running a local Android shell | `dev.cybercore.cyberterm` | MIT | [Android page](https://cybercoretech.github.io/cyberterm-android-app/) · [Cyberterm](https://cybercoretech.github.io/cyberterm/) · [Android source](https://github.com/cybercoretech/cyberterm-android-app) · [Engine source](https://github.com/cybercoretech/cyberterm) |
 | 🧊 **Holodrive Photos**: client for your self-hosted Holodrive | `dev.cybercore.holodrive.photos` | Apache-2.0 | [holodrive-android-app](https://github.com/cybercoretech/holodrive-android-app) |
 | 🌙 **Nightwatch**: watch and control your self-hosted services | `dev.cybercore.nightwatch` | MIT | [nightwatch-android-app](https://github.com/cybercoretech/nightwatch-android-app) |
 | 🛰️ **SignalWarden**: private network diagnostics | `dev.cybercore.signalwarden` | Apache-2.0 | [signalwarden](https://github.com/cybercoretech/signalwarden) |

@@ -1,0 +1,2 @@
+First release: local Android shell in a GPU-rendered terminal, with touch,
+soft-keyboard and hardware-keyboard input. No network permission or root.
