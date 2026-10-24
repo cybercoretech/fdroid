@@ -207,3 +207,20 @@ html.overlay-scroll-locked, html.overlay-scroll-locked body { overflow: hidden; 
 .status-lamp { box-shadow: none; }
 dialog.app-dialog { border-color: #40545c; box-shadow: 0 1.5rem 4rem #0009; }
 .empty { border-style: solid; }
+
+.curl-install { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: .8rem; padding: 1rem; border: 1px solid #354b55; background: #091117; }
+.curl-install .label { display: block; margin-bottom: .55rem; }
+.curl-command { margin: 0; padding: .75rem; overflow-wrap: anywhere; white-space: pre-wrap; border: 1px solid #263640; color: #c5e1df; background: #070c11; font: .76rem/1.55 var(--mono); }
+.curl-install.unavailable { display: block; border-color: #5d4654; }
+.curl-install.unavailable p { margin: 0; color: var(--muted); }
+@media (max-width: 620px) { .curl-install { grid-template-columns: 1fr; } }
+.app { grid-template-rows: auto auto auto auto; }
+.card-install { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: .5rem; padding: .65rem; border: 1px solid #354b55; background: #091117; }
+.card-install .label { grid-column: 1 / -1; font-size: .56rem; }
+.card-install .curl-command { min-width: 0; max-height: 5.3rem; overflow: auto; padding: .5rem; font-size: .61rem; line-height: 1.4; }
+.copy-install { align-self: end; padding: .48rem .55rem; }
+.card-install.unavailable { display: block; border-color: #5d4654; }
+.card-install.unavailable p { margin: .4rem 0 0; color: var(--muted); font-size: .77rem; }
+.app-foot .details-link { padding: 0; border: 0; background: transparent; color: var(--droid-mint); font: inherit; letter-spacing: inherit; cursor: pointer; white-space: nowrap; }
+.app-foot .details-link:hover, .app-foot .details-link:focus-visible { color: var(--droid-cyan); text-decoration: underline; }
+@media (max-width: 620px) { .card-install { grid-template-columns: minmax(0, 1fr) auto; } }

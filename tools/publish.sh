@@ -71,7 +71,11 @@ print("\n".join(miss))
 PY
 }
 for attempt in 1 2; do
-  "$FDROID" update --use-date-from-apk 2>&1 | grep -v 'unsafe permissions' | grep -E 'ERROR|WARNING|Finished' || true
+  if ! update_output=$("$FDROID" update --use-date-from-apk 2>&1); then
+    printf '%s\n' "$update_output" | grep -v 'unsafe permissions' >&2 || true
+    die "fdroid update failed; the repository index was not verified"
+  fi
+  printf '%s\n' "$update_output" | grep -v 'unsafe permissions' | grep -E 'ERROR|WARNING|Finished' || true
   missing=$(missing_refs)
   [[ -z "$missing" ]] && break
   say "index references missing files (attempt $attempt):"; printf '%s\n' "$missing" | sed 's/^/  /'

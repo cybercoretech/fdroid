@@ -143,6 +143,9 @@
         el('span', { className: 'badge', textContent: 'OPEN SOURCE' }),
         el('span', { className: 'badge offline', textContent: 'NOT IN F-DROID INDEX' })),
       desc('A focused Android SSH client with server fingerprint verification and an operator-controlled remote shell.\n\nReview a server’s host key before connecting, manage SSH identities, and work in a mobile terminal built for deliberate remote operations.\n\nCyberSSH is featured here as a Cybercore project. It is not currently distributed through this F-Droid repository.'),
+      el('section', { className: 'curl-install unavailable' },
+        el('span', { className: 'label', textContent: 'CURL INSTALL' }),
+        el('p', { textContent: 'No install command yet: CyberSSH has no published APK release and is not in this F-Droid index.' })),
       el('div', { className: 'facts' },
         el('div', { className: 'fact' }, el('span', { textContent: 'PROJECT' }), el('code', { textContent: 'Cybercore / Android Operations' })),
         el('div', { className: 'fact' }, el('span', { textContent: 'SECURITY FOCUS' }), el('code', { textContent: 'SSH host-key verification' })),
@@ -158,6 +161,9 @@
     const perms = permsOf(v), af = v.antiFeatures || {};
     const shots = (m.screenshots?.phone && en(m.screenshots.phone)) || [];
     const signer = v.manifest.signer?.sha256?.[0] || '';
+    const installCommand = `curl -fL 'https://cybercoretech.github.io/fdroid/${REPO}${v.file.name}' -o '${id}.apk' && adb install -r '${id}.apk'`;
+    const copyInstall = el('button', { className: 'chip-btn', type: 'button', textContent: 'COPY COMMAND' });
+    copyInstall.dataset.copyText = installCommand;
     const link = (href, text, cls = 'btn ghost') => href ? el('a', { className: cls, href, target: '_blank', rel: 'noopener', textContent: text }) : null;
     dlg.replaceChildren(el('div', { className: 'dlg' },
       el('div', { className: 'dlg-head' },
@@ -178,11 +184,16 @@
         el('div', { className: 'fact' }, el('span', { textContent: 'DEVELOPER SIGNER (SHA-256)' }), el('code', { textContent: signer })),
         el('div', { className: 'fact' }, el('span', { textContent: 'APK SHA-256' }), el('code', { textContent: v.file.sha256 })),
         el('div', { className: 'fact' }, el('span', { textContent: 'ANDROID' }), el('code', { textContent: `min SDK ${v.manifest.usesSdk?.minSdkVersion ?? '?'} · target ${v.manifest.usesSdk?.targetSdkVersion ?? '?'}` }))),
+      el('section', { className: 'curl-install' },
+        el('div', {}, el('span', { className: 'label', textContent: 'CURL INSTALL · ANDROID PLATFORM TOOLS REQUIRED' }),
+          el('pre', { className: 'curl-command', textContent: installCommand })), copyInstall),
       el('div', {}, el('span', { className: 'label', textContent: 'PERMISSIONS' }),
         el('div', { className: 'perms' }, perms.length ? perms.map((p) => el('span', { className: 'badge', textContent: PERM[p] || p })) : el('span', { className: 'badge offline', textContent: 'NONE' }))),
       el('div', { className: 'dlg-actions' },
         link(`${REPO}${v.file.name}`, 'DOWNLOAD APK ↓', 'btn'),
-        link(m.sourceCode, 'SOURCE ↗'), m.webSite !== m.sourceCode ? link(m.webSite, 'SITE ↗') : null, link(m.changelog, 'RELEASES ↗'))));
+        link(m.sourceCode, 'SOURCE ↗'), m.webSite !== m.sourceCode ? link(m.webSite, 'SITE ↗') : null,
+        id === 'dev.cybercore.cybermeta' ? link('https://cybercoretech.github.io/cybermeta/', 'DESKTOP CLI ↗') : null,
+        link(m.changelog, 'RELEASES ↗'))));
     dlg.showModal();
     window.cybercorePageScrollLock?.lock('app-details');
   };
@@ -253,6 +264,9 @@
             el('span', { className: 'badge ver', textContent: 'PROJECT SPOTLIGHT' }),
             el('span', { className: 'badge', textContent: 'ANDROID' }),
             el('span', { className: 'badge', textContent: 'OPEN SOURCE' })),
+          el('div', { className: 'card-install unavailable' },
+            el('span', { className: 'label', textContent: 'CURL INSTALL' }),
+            el('p', { textContent: 'Unavailable: no published APK release or F-Droid package yet.' })),
           el('div', { className: 'app-foot' },
             el('span', { className: 'cyberssh-index-status', textContent: 'NOT IN F-DROID INDEX' }),
             el('span', { textContent: 'VIEW DETAILS ↗' })));
@@ -261,7 +275,10 @@
       })() : null;
       const appCards = shown.map((x, i) => {
         const perms = permsOf(x.v), af = x.v.antiFeatures || {};
-        const card = el('button', { className: 'app', type: 'button', ariaLabel: `${en(x.m.name)}: details` },
+        const installCommand = `curl -fL 'https://cybercoretech.github.io/fdroid/${REPO}${x.v.file.name}' -o '${x.id}.apk' && adb install -r '${x.id}.apk'`;
+        const copyInstall = el('button', { className: 'chip-btn copy-install', type: 'button', textContent: 'COPY' });
+        copyInstall.dataset.copyText = installCommand;
+        const card = el('article', { className: 'app', ariaLabel: `${en(x.m.name)}: details` },
           el('div', { className: 'app-head' },
             el('div', { className: 'app-icon' }, el('img', { src: REPO + en(x.m.icon).name, alt: '', width: 68, height: 68, loading: 'lazy' })),
             el('div', {}, el('h3', { textContent: en(x.m.name).toUpperCase() }), el('p', { className: 'sum', textContent: en(x.m.summary) }))),
@@ -271,10 +288,17 @@
             Object.keys(af).includes('NonFreeNet') ? el('span', { className: 'badge self', textContent: 'SELF-HOSTED' }) : null,
             el('span', { className: 'badge', textContent: `${mb(x.v.file.size)} MB` }),
             ...x.cats.map((c) => el('span', { className: 'badge', textContent: c.toUpperCase() }))),
+          el('div', { className: 'card-install' },
+            el('span', { className: 'label', textContent: 'CURL INSTALL · ADB' }),
+            el('pre', { className: 'curl-command', textContent: installCommand }), copyInstall),
           el('div', { className: 'app-foot' },
             el('span', {}, 'SIGNER ', el('b', { textContent: (x.v.manifest.signer?.sha256?.[0] || '').slice(0, 8) + '…' })),
-            el('span', { textContent: `UPDATED ${ago(x.v.added)} · ${x.m.license}` })));
-        card.addEventListener('click', () => { history.replaceState(null, '', `#app=${x.id}`); openApp(x.id, x.p); });
+            el('span', { textContent: `UPDATED ${ago(x.v.added)} · ${x.m.license}` }),
+            el('button', { className: 'details-link', type: 'button', textContent: 'DETAILS ↗', onclick: (e) => { e.stopPropagation(); history.replaceState(null, '', `#app=${x.id}`); openApp(x.id, x.p); } })));
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('[data-copy-text], .details-link')) return;
+          history.replaceState(null, '', `#app=${x.id}`); openApp(x.id, x.p);
+        });
         card.style.transitionDelay = reduced ? '0s' : `${i * 70}ms`;
         tilt(card); io ? io.observe(card) : card.classList.add('in');
         return card;
