@@ -1,0 +1,24 @@
+Categories:
+  - System
+  - Development
+License: MIT
+AuthorName: Cybercore Tech
+AuthorEmail: dev@cybercoretech.net
+WebSite: https://cybercoretech.github.io/cyberterm-android-app/
+SourceCode: https://github.com/cybercoretech/cyberterm-android-app
+IssueTracker: https://github.com/cybercoretech/cyberterm-android-app/issues
+Changelog: https://github.com/cybercoretech/cyberterm-android-app/releases
+
+Name: Cyberterm
+Summary: GPU terminal for a local Android shell
+Description: |-
+  A GPU-rendered terminal for Android, using Cyberterm's native Rust
+  terminal engine. Runs the unprivileged Android system shell inside the
+  app's private storage.
+
+  * Interactive /system/bin/sh in a real pseudo-terminal
+  * GPU-rendered terminal with soft-keyboard, hardware-keyboard and touch support
+  * Files stay in private app storage; no shared-storage permission
+  * No root, account, analytics, or internet permission
+
+  This app provides an Android shell, not a Linux distribution or package manager.
