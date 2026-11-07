@@ -1,0 +1,60 @@
+name: Deploy F-Droid to Cloudflare
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**/*'   # any change triggers deployment
+  workflow_dispatch:   # allow manual trigger
+
+permissions:
+  contents: read
+  id-token: write   # needed for OIDC token exchange with Cloudflare
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site (Vite)
+        run: npm run build:react
+
+      # ------------------------------------------------------------
+      # Upload generated repo/ assets to R2 (including new APKs)
+      # ------------------------------------------------------------
+      - name: Install Wrangler
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+
+      - name: Sync repo/ folder to R2
+        env:
+          R2_BUCKET: fdroid-repo
+        run: |
+          # Upload every file under the generated repo directory
+          find repo -type f | while read -r file; do
+            rel_path="${file#./}"   # keep leading "repo/"
+            echo "Uploading $rel_path → r2://${R2_BUCKET}/${rel_path}"
+            wrangler r2 object put "${rel_path}" --file "$file" --bucket "${R2_BUCKET}"
+          done
+
+      # ------------------------------------------------------------
+      # Deploy Pages site (includes worker)
+      # ------------------------------------------------------------
+      - name: Publish Pages site
+        run: |
+          wrangler pages publish ./ --project-name fdroid-pages
