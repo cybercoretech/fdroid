@@ -149,7 +149,7 @@ function PermissionCompare() {
   if (!apps.length) return <div className="widget-card widget-loading">{state.state === 'offline' ? 'Permission data is unavailable while the repository index is offline.' : 'Waiting for the current repository index…'}</div>;
   const active = apps.filter((app) => selected.includes(app.id));
   const toggle = (id) => setSelected((current) => current.includes(id) ? current.filter((value) => value !== id) : current.length < 4 ? [...current, id] : current);
-  const rows = permissionGroups.filter((item) => group === 'all' || item.id === group).map((item) => ({ title: item.title, has: active.map((app) => item.match(permissionNames(app))) }));
+  const rows = permissionGroups.filter((item) => group === 'all' || item.id === group).map((item) => ({ title: item.title, has: active.map((app) => item.match([...permissionNames(app)])) }));
   const allNames = [...new Set(active.flatMap((app) => [...permissionNames(app)]))].sort();
   const knownNames = new Set(['INTERNET', 'ACCESS_NETWORK_STATE', 'CHANGE_NETWORK_STATE', 'ACCESS_WIFI_STATE', 'CHANGE_WIFI_STATE', 'NEARBY_WIFI_DEVICES', 'CAMERA', 'RECORD_AUDIO', 'BODY_SENSORS', 'ACTIVITY_RECOGNITION', 'USE_BIOMETRIC', 'USE_FINGERPRINT', 'READ_MEDIA_IMAGES', 'READ_MEDIA_VIDEO', 'READ_MEDIA_AUDIO', 'READ_EXTERNAL_STORAGE', 'WRITE_EXTERNAL_STORAGE', 'MANAGE_EXTERNAL_STORAGE', 'ACCESS_MEDIA_LOCATION', 'FOREGROUND_SERVICE', 'WAKE_LOCK', 'RECEIVE_BOOT_COMPLETED', 'SCHEDULE_EXACT_ALARM']);
   const otherNames = allNames.filter((name) => !knownNames.has(name));
