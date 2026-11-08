@@ -1,11 +1,8 @@
 name = "fdroid-pages"
-type = "javascript"
-account_id = "f770e07e62b976b12330421edcf2a7d9"
-workers_dev = false
+pages_build_output_dir = "./dist"
 compatibility_date = "2024-09-01"
 
-# R2 bucket binding – the worker accesses it as env.FDROID_R2
 [[r2_buckets]]
 binding = "FDROID_R2"
 bucket_name = "fdroid-repo"
-preview_bucket_name = "fdroid-repo"
+
