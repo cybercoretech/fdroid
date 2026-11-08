@@ -3,6 +3,7 @@
 **Every Cybercore Android app, one tap, kept up to date.**
 
 🌐 **Add it:** <https://cybercoretech.github.io/fdroid/> (tap *Add to F-Droid* or scan the QR code)
+☁️ **Cloudflare Pages:** <https://cybercore-fdroid.pages.dev/> (tap *Add to F-Droid* or scan the QR code)
 
 | | |
 |---|---|
