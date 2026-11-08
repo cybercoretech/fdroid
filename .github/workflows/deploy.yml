@@ -56,8 +56,7 @@ jobs:
 
             wrangler r2 object put \
               "${R2_BUCKET}/${rel_path}" \
-              --file "$file" \
-              --remote
+              --file "$file"
 
           done < <(find repo -type f -print0)
 
