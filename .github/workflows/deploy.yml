@@ -1,4 +1,3 @@
-
 name: Deploy F-Droid to Cloudflare
 
 on:
@@ -14,10 +13,6 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
-    env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
 
     steps:
       - name: Checkout repository
@@ -37,32 +32,84 @@ jobs:
       - name: Install Wrangler
         run: npm install --global wrangler@3.90.0
 
-      - name: Sync repository to R2
-        env:
-          R2_BUCKET: fdroid-repo
+      - name: Verify Cloudflare credentials
         shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
         run: |
           set -euo pipefail
 
-          if [ ! -d repo ]; then
-            echo "ERROR: repo directory does not exist"
+          if [[ -z "${CLOUDFLARE_API_TOKEN:-}" ]]; then
+            echo "::error::GitHub secret CF_API_TOKEN is missing, empty, or unavailable to this workflow."
             exit 1
           fi
 
+          if [[ -z "${CLOUDFLARE_ACCOUNT_ID:-}" ]]; then
+            echo "::error::GitHub secret CF_ACCOUNT_ID is missing, empty, or unavailable to this workflow."
+            exit 1
+          fi
+
+          echo "Cloudflare credentials are present."
+
+      - name: Sync repository to R2
+        shell: bash
+        env:
+          R2_BUCKET: fdroid-repo
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+
+          if [[ ! -d repo ]]; then
+            echo "::error::repo directory does not exist."
+            exit 1
+          fi
+
+          file_count=0
+
           while IFS= read -r -d '' file; do
             rel_path="${file#./}"
+
+            case "${file,,}" in
+              *.apk) content_type="application/vnd.android.package-archive" ;;
+              *.jar) content_type="application/java-archive" ;;
+              *.xml) content_type="application/xml" ;;
+              *.json) content_type="application/json" ;;
+              *.png) content_type="image/png" ;;
+              *.jpg|*.jpeg) content_type="image/jpeg" ;;
+              *.webp) content_type="image/webp" ;;
+              *.zip) content_type="application/zip" ;;
+              *.gz) content_type="application/gzip" ;;
+              *.txt) content_type="text/plain; charset=utf-8" ;;
+              *) content_type="application/octet-stream" ;;
+            esac
 
             echo "Uploading ${rel_path}"
 
             wrangler r2 object put \
               "${R2_BUCKET}/${rel_path}" \
-              --file "$file"
+              --file "$file" \
+              --content-type "$content_type"
 
+            file_count=$((file_count + 1))
           done < <(find repo -type f -print0)
 
+          if [[ "$file_count" -eq 0 ]]; then
+            echo "::error::No files found under repo/."
+            exit 1
+          fi
+
+          echo "Uploaded ${file_count} files to R2."
+
       - name: Deploy Cloudflare Pages
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
         run: |
+          set -euo pipefail
+
           wrangler pages deploy ./dist \
             --project-name fdroid-pages \
             --branch main
-
