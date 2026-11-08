@@ -5,7 +5,8 @@
   "scripts": {
     "prebuild": "scripts/generate_fdroid_data.sh",
     "build:react": "vite build",
-    "check": "npm run build:react"
+    "check": "npm run build:react",
+    "build:pages": "bash scripts/build_pages.sh"
   },
   "dependencies": {
     "react": "19.2.8",
